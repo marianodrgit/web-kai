@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Kairos - Recupera tu tiempo. Bloqueo inteligente de apps con sistema de recompensas.">
+    <title>Kairos - Recupera tu tiempo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #E8F0FE 0%, #F9F6EE 100%);
+            color: #1D3557;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #453F78;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: #2A9D8F;
+            margin-bottom: 40px;
+        }
+
+        .hero {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            color: #453F78;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #1D3557;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #453F78;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(69, 63, 120, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #2A9D8F;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 25px rgba(42, 157, 143, 0.4);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #453F78;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #1D3557;
+            font-size: 1.1rem;
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #1D3557;
+            border-top: 2px solid rgba(69, 63, 120, 0.1);
+        }
+
+        footer a {
+            color: #453F78;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #2A9D8F;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>⏳ Kairos</h1>
+            <p class="tagline">Recupera tu tiempo. Vive con propósito.</p>
+        </header>
+
+        <div class="hero">
+            <h2>Bloqueo Inteligente + Recompensas</h2>
+            <p>
+                Kairos te ayuda a controlar el uso de apps distractoras sin restricciones aburridas.
+                Gana créditos por enfocarte y úsalos cuando realmente necesites esa pausa.
+            </p>
+            <a href="#" class="cta-button">Próximamente en Google Play</a>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="icon">🔒</div>
+                <h3>Bloqueo Inteligente</h3>
+                <p>Restringe apps distractoras con un sistema de overlay elegante y efectivo.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">💰</div>
+                <h3>Sistema de Créditos</h3>
+                <p>Gana monedas virtuales por tiempo enfocado. Úsalas para sesiones de recreo controladas.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🧘</div>
+                <h3>Bienestar Digital</h3>
+                <p>Diseñado con filosofía estoica: autocontrol asistido, no castigo.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Kairos - Desarrollado por TwoCat Digital</p>
+            <p style="margin-top: 10px;">
+                <a href="privacy-policy.html">Política de Privacidad</a> |
+                <a href="mailto:twocatdigital.io@gmail.com">Contacto</a>
+            </p>
+        </footer>
+    </div>
+</body>
+
+</html>
