@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Política de Privacidad - Kairos</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#453F78",
+                        "accent-green": "#2A9D8F",
+                        "accent-orange": "#E76F51",
+                        "soft-violet": "#D6D1F5",
+                        "calm-cream": "#F4F1DE",
+                        "ice-blue": "#E8F0FE",
+                        "dark-navy": "#1D3557",
+                        "background-light": "#E8F0FE",
+                        "background-dark": "#16161c",
+                        "pure-white": "#FEFEFE",
+                    },
+                    fontFamily: {
+                        "display": ["Roboto", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #E8F0FE;
+            color: #1D3557;
+            min-height: max(884px, 100dvh);
+        }
+        .glass-nav {
+            background: rgba(254, 254, 254, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-dark-navy dark:text-slate-100 font-display selection:bg-primary/20">
+    
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-primary/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="logo_horizontal.png" alt="Kairos Branding"
+                    class="h-16 md:h-20 scale-[1.6] md:scale-[2.0] origin-left w-auto object-contain transition-transform hover:scale-105" />
+            </a>
+            <a href="index.html" class="font-bold text-primary hover:text-accent-orange transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined">arrow_back</span>
+                <span>Volver al inicio</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="pt-32 pb-20 px-6">
+        <div class="max-w-3xl mx-auto bg-pure-white p-8 md:p-12 rounded-3xl shadow-premium border border-primary/5">
+            <h1 class="text-4xl font-extrabold text-primary mb-2">Política de Privacidad</h1>
+            <p class="text-dark-navy/60 font-medium mb-10">Última actualización: 10 de marzo de 2026</p>
+
+            <div class="space-y-8 text-dark-navy/80 leading-relaxed">
+                
+                <section class="p-6 bg-accent-green/10 rounded-2xl border border-accent-green/20">
+                    <h2 class="text-xl font-bold text-accent-green mb-3 flex items-center gap-2">
+                        <span class="material-symbols-outlined">psychiatry</span>
+                        Resumen Ejecutivo
+                    </h2>
+                    <p>Kairos procesa tu información privada (lista de apps bloqueadas, créditos y sesiones) directamente en tu dispositivo. Utilizamos Google Analytics de forma completamente anónima para entender bugs y fallos de la aplicación en caso de haberlos.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">1. Información del Desarrollador</h2>
+                    <p><strong>Nombre:</strong> TwoCat Digital<br>
+                    <strong>Aplicación:</strong> Kairos<br>
+                    <strong>Contacto:</strong> twocatdigital.io@gmail.com</p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">2. Datos Recopilados Localmente</h2>
+                    <p class="mb-3">Kairos funciona primordialmente offline y almacena localmente los siguientes datos en tu dispositivo:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Lista de aplicaciones bloqueadas:</strong> Los nombres de paquetes de apps que eliges restringir.</li>
+                        <li><strong>Saldo de créditos virtuales:</strong> Tu moneda interna para uso consciente de la aplicación.</li>
+                        <li><strong>Historial de sesiones:</strong> Registros técnicos para aplicar el bloqueo correctamente.</li>
+                    </ul>
+                    <p class="mt-3 text-sm italic opacity-80">Estos datos se guardan únicamente en la base de datos local de tu dispositivo (Room/SQLite) y no se sincronizan en nuestros servidores.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">3. Permisos Sensibles (Accesibilidad)</h2>
+                    <p class="mb-3">La aplicación es una herramienta de Bienestar Digital y Control de Tiempo y exige permisos nucleares en el sistema Android:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Servicio de Accesibilidad (Accessibility Service):</strong> Es <strong>estrictamente necesario</strong> para detectar cuándo abres una aplicación designada como bloqueada, a fin de mostrar el overlay de restricción y deducir créditos. Esta API no se utiliza para recopilar contraseñas, mensajes, ni espiar tu uso; solamente reacciona al evento "App Abierta" y lee el nombre del paquete para cotejarlo con tu lista de bloqueo personal.</li>
+                        <li><strong>Dibujar sobre otras apps (SYSTEM_ALERT_WINDOW):</strong> Permite mostrar de forma efectiva nuestra "pantalla de bloqueo y respiración consciente" interrumpiendo el flujo instintivo al abrir aplicaciones target.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">4. Servicios de Terceros</h2>
+                    <p class="mb-3">Kairos sí integra las siguientes bibliotecas y plataformas externas para poder operar en calidad de producto:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Firebase (Google Analytics / Crashlytics):</strong> Recopila datos anónimos de uso de la aplicación y reportes de cierres inesperados (crashes). Esto nos permite encontrar y arreglar errores rápidamente. Los datos no incluyen nombres, correos ni identificadores personales. No usamos esto para marketing ni anuncios personalizados.</li>
+                        <li><strong>Google Play Billing Library:</strong> Utilizada para el procesamiento de pagos in-app de los paquetes de créditos. Google Play gestiona la transacción. Kairos no recopila ni tiene acceso a tu número de tarjeta de crédito, cuenta bancaria ni información de facturación directa.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">5. Seguridad y Privacidad en Niños</h2>
+                    <p>Las mediciones están cifradas localmente dependiendo del cifrado por defecto de tu versión de Android y protegidas por nuestra implementación del Sandbox standard del sistema. Además, nuestra aplicación no está diseñada para atraer la atención e influenciar los hábitos de uso de menores de edad de 13 años. Todas las transacciones dependen directamente de la cuenta vinculada del adulto en Google Play.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">6. Derechos del Usuario</h2>
+                    <p>Dado que no operamos servidores backend en la nube que sostengan información tuya, el derecho a eliminación y acceso es ejecutado enteramente por ti mismo: <strong>Desinstalar la app elimina automáticamente y sin posibilidad de recuperación todos los datos locales, saldo de créditos y configuraciones</strong> guardados previamente. Además puedes editar a gusto tus aplicaciones bloqueadas entrando al panel principal de Kairos.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">7. Cambios en la Política</h2>
+                    <p>Si actualizamos esta política, la fecha de "Última actualización" cambiará indicando el hecho. En caso de cambios críticos en cómo usamos los permisos, se te notificará explícitamente dentro de la app.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Simple -->
+    <footer class="bg-primary text-white py-10 px-6 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3 opacity-80">
+                <span class="text-xl font-black tracking-tight">Kairos</span>
+            </div>
+            <p class="text-white/40 text-sm">© 2026 Kairos App. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

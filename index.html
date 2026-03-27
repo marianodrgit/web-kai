@@ -1,227 +1,869 @@
 <!DOCTYPE html>
-<html lang="es">
+
+<html class="scroll-smooth" lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Kairos - Recupera tu tiempo. Bloqueo inteligente de apps con sistema de recompensas.">
-    <title>Kairos - Recupera tu tiempo</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kairos - Recupera tu Bienestar Digital</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#453F78", // CalmViolet
+                        "accent-green": "#2A9D8F", // CalmGreen
+                        "accent-orange": "#E76F51", // CalmOrange
+                        "soft-violet": "#D6D1F5",
+                        "calm-cream": "#F4F1DE", // Added CalmCream
+                        "ice-blue": "#E8F0FE",
+                        "dark-navy": "#1D3557",
+                        "background-light": "#E8F0FE",
+                        "background-dark": "#16161c",
+                        "pure-white": "#FEFEFE",
+                    },
+                    fontFamily: {
+                        "display": ["Roboto", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "24px",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px rgba(69, 63, 120, 0.08)',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" }
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 10s infinite'
+                    }
+                },
+            },
+        }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* ===== Premium Gallery Glass Interactions ===== */
+        .gallery-container {
+            display: flex;
+            gap: 1.5rem;
+            padding-bottom: 3rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Firefox */
+        }
+        .gallery-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
+        }
+        
+        /* The magic ✨ -> when hovering the container, dim all except the hovered one */
+        .gallery-container:hover .gallery-item {
+            opacity: 0.5;
+            filter: blur(2px);
+            transform: scale(0.95);
+        }
+        
+        .gallery-container .gallery-item {
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .gallery-container .gallery-item:hover {
+            opacity: 1 !important;
+            filter: blur(0) !important;
+            transform: scale(1.05) translateY(-10px) !important;
+            z-index: 10;
+        }
+
+        /* Phone frame illusion */
+        .phone-mockup {
+            border: 8px solid #f8f9fa; /* Light bezel */
+            box-shadow: 0 25px 50px -12px rgba(69, 63, 120, 0.25), inset 0 0 0 1px rgba(0,0,0,0.05);
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #E8F0FE;
+            color: #1D3557;
+            min-height: max(884px, 100dvh);
+        }
+
+        .glass-nav {
+            background: rgba(254, 254, 254, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        img {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        /* Testimonials Carousel */
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .testimonial-card {
+            min-width: 100%;
+            padding: 0 1rem;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #E8F0FE 0%, #F9F6EE 100%);
-            color: #1D3557;
-            line-height: 1.6;
+        @media (min-width: 768px) {
+            .testimonial-card {
+                min-width: 33.333%;
+            }
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #D6D1F5;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
         }
 
-        header {
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: #453F78;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            color: #2A9D8F;
-            margin-bottom: 40px;
-        }
-
-        .hero {
-            background: white;
-            border-radius: 20px;
-            padding: 60px 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            margin-bottom: 60px;
-            text-align: center;
-        }
-
-        .hero h2 {
-            color: #453F78;
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #1D3557;
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
+        .carousel-dot.active {
             background: #453F78;
-            color: white;
-            padding: 15px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(69, 63, 120, 0.3);
+            transform: scale(1.3);
+        }
+        .carousel-dot.active {
+            background: #453F78;
+            transform: scale(1.3);
         }
 
-        .cta-button:hover {
-            background: #2A9D8F;
-            transform: translateY(-2px);
-            box-shadow: 0 7px 25px rgba(42, 157, 143, 0.4);
+        /* Animated Blobs */
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(69, 63, 120, 0.15) 0%, rgba(69, 63, 120, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+            animation: move 20s infinite alternate;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(10%, 10%); }
         }
 
-        .feature-card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-card h3 {
-            color: #453F78;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .feature-card p {
-            color: #1D3557;
-            font-size: 1.1rem;
-        }
-
-        .icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: #1D3557;
-            border-top: 2px solid rgba(69, 63, 120, 0.1);
-        }
-
-        footer a {
-            color: #453F78;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: #2A9D8F;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .tagline {
-                font-size: 1.2rem;
-            }
-
-            .hero h2 {
-                font-size: 1.5rem;
-            }
+        .phone-video {
+            mask-image: url('data:image/svg+xml;utf8,<svg ...></svg>'); /* Potential mask to fit phone frame if needed */
+            border-radius: 1.8rem;
         }
     </style>
 </head>
 
-<body>
-    <div class="container">
-        <header>
-            <h1>⏳ Kairos</h1>
-            <p class="tagline">Recupera tu tiempo. Vive con propósito.</p>
-        </header>
-
-        <div class="hero">
-            <h2>Bloqueo Inteligente + Recompensas</h2>
-            <p>
-                Kairos te ayuda a controlar el uso de apps distractoras sin restricciones aburridas.
-                Gana créditos por enfocarte y úsalos cuando realmente necesites esa pausa.
+<body
+    class="bg-background-light dark:bg-background-dark text-dark-navy dark:text-slate-100 font-display selection:bg-primary/20 relative overflow-x-hidden">
+    <div class="blob top-0 left-0"></div>
+    <div class="blob bottom-0 right-0" style="animation-delay: -10s; background: radial-gradient(circle, rgba(42, 157, 143, 0.1) 0%, rgba(42, 157, 143, 0) 70%);"></div>
+    <!-- Sticky Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-primary/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2 transition-transform hover:-translate-y-1 hover:cursor-pointer">
+                <img src="logo_horizontal.png" alt="Kairos Branding" width="200" height="80" fetchpriority="high"
+                    class="h-16 md:h-20 scale-[1.6] md:scale-[2.0] origin-left w-auto object-contain" />
+            </div>
+            <div class="hidden md:flex items-center gap-8 font-medium">
+                <a class="hover:text-primary transition-colors hover:cursor-pointer"
+                    aria-label="Ir a sección de Características" href="#features"
+                    data-i18n="nav_features">Características</a>
+                <a class="hover:text-primary transition-colors hover:cursor-pointer"
+                    aria-label="Ir a la sección de La Ciencia" href="#science" data-i18n="nav_science">La Ciencia</a>
+                <div class="flex items-center gap-2 border-l border-dark-navy/10 pl-4">
+                    <button id="btn-lang-es" onclick="setLanguage('es')"
+                        class="font-bold text-primary hover:text-primary transition-colors">ES</button>
+                    <span class="text-dark-navy/20">/</span>
+                    <button id="btn-lang-en" onclick="setLanguage('en')"
+                        class="text-dark-navy/50 hover:text-primary transition-colors">EN</button>
+                </div>
+                <a href="#download"
+                    class="bg-accent-green hover:bg-opacity-90 text-white px-6 py-2.5 rounded-full font-bold transition-transform transform hover:scale-105 active:scale-95 shadow-lg shadow-accent-green/20">
+                    <span data-i18n="nav_download">Descargar para Android</span>
+                </a>
+            </div>
+            <div class="md:hidden text-primary flex items-center gap-4">
+                <div class="flex items-center gap-2 text-sm bg-white/50 px-2 py-1 rounded-lg">
+                    <button id="btn-lang-es-mob" onclick="setLanguage('es')" class="font-bold">ES</button>
+                    <span class="text-dark-navy/20">|</span>
+                    <button id="btn-lang-en-mob" onclick="setLanguage('en')">EN</button>
+                </div>
+                <button aria-label="Abrir menú" class="material-symbols-outlined text-3xl">menu</button>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full font-semibold text-sm">
+                    <span class="material-symbols-outlined text-lg">verified</span>
+                    <span data-i18n="hero_tag">Transforma tu relación con el móvil</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-extrabold leading-[1.1] tracking-tight text-primary [text-wrap:balance]">
+                    <span data-i18n="hero_title_1">Recupera tu tiempo, </span><span class="text-accent-orange"><span
+                            data-i18n="hero_title_2">sin castigos.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-dark-navy/80 font-medium leading-relaxed max-w-xl">
+                    <span data-i18n="hero_desc">Kairos no te prohíbe usar tu celular, le devuelve su valor. Cada vez que
+                        abras una app distractora, deberás "pagar" con un crédito. Una micro-fricción para que dejes de
+                        hacer scroll automático y empieces a elegir conscientemente.</span>
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="#download"
+                        class="bg-accent-green hover:bg-opacity-90 text-white px-8 py-4 rounded-xl font-extrabold text-lg transition-transform transform hover:-translate-y-1 shadow-xl shadow-accent-green/20 flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">android</span>
+                        <span data-i18n="nav_download">Descargar para Android</span>
+                    </a>
+                    <a href="#features"
+                        class="bg-pure-white border-2 border-primary/10 hover:border-primary/30 px-8 py-4 rounded-xl font-bold text-lg text-primary transition-colors flex items-center justify-center gap-2">
+                        <span data-i18n="hero_btn_how">Descubre cómo funciona</span>
+                    </a>
+                </div>
+            </div>
+            <div class="relative group">
+                <div
+                    class="absolute -inset-4 bg-primary/5 rounded-[3rem] blur-2xl group-hover:bg-primary/10 transition-colors duration-500">
+                </div>
+                <div
+                    class="relative bg-pure-white p-2 md:p-3 rounded-[2.5rem] shadow-premium border border-primary/5 max-w-[320px] mx-auto overflow-hidden group-hover:shadow-2xl transition-shadow duration-500">
+                    <div class="w-full h-full rounded-[2rem] overflow-hidden bg-background-dark">
+                        <!-- CSS Crop: Scale up slightly and translate up to hide the Android status bar -->
+                        <video id="hero-video" class="w-full h-auto scale-[1.09] -translate-y-[4.5%] origin-top shadow-sm transition-transform duration-700" autoplay loop muted playsinline width="1080" height="2400">
+                            <source src="images/es/demo_es.mp4" type="video/mp4">
+                            <img id="hero-asset" alt="Kairos App Interface" class="rounded-[2rem] w-full h-auto" src="images/es/principal.jpg" width="1080" height="2400" fetchpriority="high" />
+                        </video>
+                    </div>
+                </div>
+                <!-- Floating Card -->
+                <div
+                    class="absolute -bottom-6 -left-6 bg-pure-white p-4 rounded-2xl shadow-premium border border-primary/5 flex items-center gap-4 animate-bounce-slow">
+                    <div
+                        class="w-12 h-12 bg-accent-green/10 text-accent-green rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">eco</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-primary">+45 min</p>
+                        <p class="text-xs text-dark-navy/60" data-i18n="hero_floating_card">Tiempo recuperado hoy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Trust Band -->
+    <section class="bg-soft-violet/20 py-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+            <div class="flex -space-x-3">
+                <div
+                    class="w-10 h-10 rounded-full border-2 border-pure-white bg-primary text-white flex items-center justify-center font-bold text-sm">
+                    ML</div>
+                <div
+                    class="w-10 h-10 rounded-full border-2 border-pure-white bg-accent-green text-white flex items-center justify-center font-bold text-sm">
+                    SA</div>
+                <div
+                    class="w-10 h-10 rounded-full border-2 border-pure-white bg-accent-orange text-white flex items-center justify-center font-bold text-sm">
+                    JP</div>
+            </div>
+            <p class="text-dark-navy/70 font-semibold text-lg" data-i18n="trust_band">Respaldado por una <span class="text-primary font-extrabold">exitosa fase beta</span> con cientos de usuarios reales.
             </p>
-            <a href="#" class="cta-button">Próximamente en Google Play</a>
         </div>
-
-        <div class="features">
-            <div class="feature-card">
-                <div class="icon">🔒</div>
-                <h3>Bloqueo Inteligente</h3>
-                <p>Restringe apps distractoras con un sistema de overlay elegante y efectivo.</p>
+    </section>
+    <!-- Features Grid -->
+    <section class="py-24 px-6 bg-background-light" id="features">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 space-y-4">
+                <h2 class="text-4xl font-extrabold text-primary" data-i18n="feat_title">Diseñado para tu bienestar</h2>
+                <p class="text-dark-navy/60 font-medium max-w-2xl mx-auto" data-i18n="feat_subtitle">Herramientas premium que no se sienten como
+                    una restricción, sino como un aliado.</p>
             </div>
-
-            <div class="feature-card">
-                <div class="icon">💰</div>
-                <h3>Sistema de Créditos</h3>
-                <p>Gana monedas virtuales por tiempo enfocado. Úsalas para sesiones de recreo controladas.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon">🧘</div>
-                <h3>Bienestar Digital</h3>
-                <p>Diseñado con filosofía estoica: autocontrol asistido, no castigo.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="bg-pure-white p-8 rounded-2xl shadow-premium border border-primary/5 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">pause_circle</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-primary mb-4" data-i18n="feat_1_title">Fricción Consciente</h3>
+                    <p class="text-dark-navy/70 leading-relaxed font-medium" data-i18n="feat_1_desc">
+                        Interrupciones estratégicas que te hacen pensar antes de actuar. Rompe el ciclo del scroll
+                        automático.
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="bg-pure-white p-8 rounded-2xl shadow-premium border border-primary/5 hover:-translate-y-2 transition-transform duration-300">
+                    <div
+                        class="w-14 h-14 bg-accent-green/10 text-accent-green rounded-xl flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">toll</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-primary mb-4" data-i18n="feat_2_title">Presupuesto de Ocio</h3>
+                    <p class="text-dark-navy/70 leading-relaxed font-medium" data-i18n="feat_2_desc">
+                        Recibes 2 créditos gratis al día. Si quieres tomar un recreo consecutivo, te costará más caro.
+                        Perder el tiempo pasa a ser un lujo, no un acto reflejo.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="bg-pure-white p-8 rounded-2xl shadow-premium border border-primary/5 hover:-translate-y-2 transition-transform duration-300">
+                    <div
+                        class="w-14 h-14 bg-accent-orange/10 text-accent-orange rounded-xl flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">shield</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-primary mb-4" data-i18n="feat_3_title">Autocontrol</h3>
+                    <p class="text-dark-navy/70 leading-relaxed font-medium" data-i18n="feat_3_desc">
+                        Define tus propios límites sin sentirte castigado. La tecnología debe servirte a ti, no al
+                        revés.
+                    </p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- NEW SCIENCE SECTION -->
-        <div class="hero" style="background: linear-gradient(135deg, #FFF 0%, #F4F7FB 100%); text-align: left;">
-            <h2 style="text-align: center; color: #2A9D8F; font-size: 2.2rem;">🧠 ¿Por qué recreos de 15 minutos?</h2>
-            <p style="text-align: center; margin-bottom: 40px; color: #666;">No es un número al azar. Está diseñado según cómo funciona tu cerebro.</p>
+    <!-- Screenshot Gallery -->
+    <section class="py-24 px-6 bg-white overflow-hidden" id="gallery">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 space-y-4">
+                <h2 class="text-4xl font-extrabold text-primary" data-i18n="gallery_title">Tu nueva interfaz de bienestar</h2>
+                <p class="text-dark-navy/60 font-medium max-w-2xl mx-auto" data-i18n="gallery_subtitle">Explora cada rincón de Kairos, diseñado para ser simple, elegante y efectivo.</p>
+            </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
-                <div style="padding: 20px;">
-                    <h3 style="color: #453F78; margin-bottom: 10px;">📉 Ritmos Ultradianos</h3>
-                    <p style="font-size: 1rem;">Tu cerebro no es una máquina lineal. Funciona en ciclos de energía de aprox. 90 minutos. Después de ese pico, tu cuerpo pide biológicamente un descanso de 15 a 20 minutos para recargar neurotransmisores. Kairos respeta este ciclo natural.</p>
+            <!-- Gallery Wrapper with Arrows -->
+            <div class="relative">
+                <!-- Edge fade gradients -->
+                <div class="hidden md:block absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+                <div class="hidden md:block absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+                
+                <!-- Left Arrow -->
+                <button onclick="scrollGallery(-1)" aria-label="Anterior"
+                    class="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-xl border border-primary/10 items-center justify-center hover:bg-primary hover:text-white text-primary transition-[background-color,color,transform] hover:scale-110 active:scale-95">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                
+                <!-- Right Arrow -->
+                <button onclick="scrollGallery(1)" aria-label="Siguiente"
+                    class="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-xl border border-primary/10 items-center justify-center hover:bg-primary hover:text-white text-primary transition-[background-color,color,transform] hover:scale-110 active:scale-95">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+
+                <div class="gallery-container px-4 md:px-12 pt-8" id="galleryTrack">
+                    <!-- Welcome -->
+                    <div class="min-w-[280px] md:min-w-[320px] snap-center gallery-item relative mt-4">
+                        <div class="bg-ice-blue rounded-[2.5rem] p-4 h-full relative shadow-premium border border-primary/5">
+                            <img id="gallery-1" src="images/es/onboarding1.jpg" alt="Bienvenida" class="phone-mockup rounded-[2rem] w-full" loading="lazy" width="1080" height="2400" />
+                        </div>
+                    </div>
+                    <!-- Main -->
+                    <div class="min-w-[280px] md:min-w-[320px] snap-center gallery-item relative mt-4">
+                        <div class="bg-soft-violet rounded-[2.5rem] p-4 h-full relative shadow-premium border border-primary/5">
+                            <img id="gallery-2" src="images/es/principal.jpg" alt="Dashboard" class="phone-mockup rounded-[2rem] w-full" loading="lazy" width="1080" height="2400" />
+                        </div>
+                    </div>
+                    <!-- Wall -->
+                    <div class="min-w-[280px] md:min-w-[320px] snap-center gallery-item relative mt-4">
+                        <div class="bg-calm-cream rounded-[2.5rem] p-4 h-full relative shadow-premium border border-primary/5">
+                            <img id="gallery-3" src="images/es/muro.jpg" alt="Muro de bloqueo" class="phone-mockup rounded-[2rem] w-full" loading="lazy" width="1080" height="2400" />
+                        </div>
+                    </div>
+                    <!-- List -->
+                    <div class="min-w-[280px] md:min-w-[320px] snap-center gallery-item relative mt-4">
+                        <div class="bg-primary/5 rounded-[2.5rem] p-4 h-full relative shadow-premium border border-primary/5">
+                            <img id="gallery-4" src="images/es/listado.jpg" alt="Listado de Apps" class="phone-mockup rounded-[2rem] w-full" loading="lazy" width="1080" height="2400" />
+                        </div>
+                    </div>
+                    <!-- Store -->
+                    <div class="min-w-[280px] md:min-w-[320px] snap-center gallery-item relative mt-4">
+                        <div class="bg-accent-green/10 rounded-[2.5rem] p-4 h-full relative shadow-premium border border-primary/5">
+                            <img id="gallery-5" src="images/es/tienda.jpg" alt="Tienda" class="phone-mockup rounded-[2rem] w-full" loading="lazy" width="1080" height="2400" />
+                        </div>
+                    </div>
                 </div>
-                <div style="padding: 20px;">
-                    <h3 style="color: #453F78; margin-bottom: 10px;">⚡ Restauración de la Atención</h3>
-                    <p style="font-size: 1rem;">La atención es un recurso finito. Investigaciones demuestran que las "micro-pausas" cronometradas previenen la fatiga de decisión y mantienen el rendimiento alto durante todo el día, a diferencia de intentar "aguantar" sin parar.</p>
+            </div>
+    </section>
+
+    <!-- La Ciencia Section -->
+    <section class="py-24 px-6 relative overflow-hidden bg-calm-cream" id="science">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-accent-orange/5 rounded-l-[10rem] -z-10"></div>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+            <div class="w-full md:w-1/2 relative">
+                <div class="absolute -inset-10 bg-gradient-to-r from-accent-green/20 to-primary/20 rounded-full blur-3xl opacity-50 z-0 animate-pulse-slow"></div>
+                <div class="relative z-10 w-full aspect-square max-w-[400px] mx-auto flex justify-center items-center rounded-full bg-white/50 backdrop-blur-xl border border-white shadow-[0_20px_60px_-15px_rgba(69,63,120,0.15)] transition-transform hover:scale-105 duration-500">
+                    <svg class="w-[160px] h-[160px] max-w-full drop-shadow-2xl" viewBox="0 0 100 160" overflow="visible">
+                        <style>
+                            @keyframes hourglass-spin {
+                                0%, 80% { transform: rotate(0deg); }
+                                95%, 100% { transform: rotate(180deg); }
+                            }
+                            @keyframes top-sand {
+                                0%, 5% { transform: scaleY(1); }
+                                75%, 100% { transform: scaleY(0); }
+                            }
+                            @keyframes bottom-sand {
+                                0%, 5% { transform: scaleY(0); }
+                                75%, 100% { transform: scaleY(1); }
+                            }
+                            @keyframes stream-drop {
+                                0%, 5% { opacity: 0; transform: scaleY(0); }
+                                10%, 70% { opacity: 1; transform: scaleY(1); }
+                                75%, 100% { opacity: 0; transform: scaleY(0); }
+                            }
+                            .hg-container {
+                                /* FIX: Exact pixel center prevents lateral drift during rotation */
+                                transform-origin: 50px 80px;
+                                animation: hourglass-spin 4s ease-in-out infinite;
+                            }
+                            .hg-sand-top {
+                                transform-origin: 50px 75px;
+                                animation: top-sand 4s linear infinite;
+                            }
+                            .hg-sand-bottom {
+                                transform-origin: 50px 150px;
+                                animation: bottom-sand 4s linear infinite;
+                            }
+                            .hg-stream {
+                                transform-origin: 50px 80px;
+                                animation: stream-drop 4s linear infinite;
+                            }
+                        </style>
+                        <g class="hg-container">
+                            <!-- Background accent glow -->
+                            <ellipse cx="50" cy="80" rx="30" ry="60" fill="rgba(42, 157, 143, 0.05)" />
+                            
+                            <!-- Sand Top (Clip Path) -->
+                            <clipPath id="top-glass">
+                                <path d="M 15 15 L 85 15 C 85 15, 75 35, 50 72 C 25 35, 15 15, 15 15 Z"/>
+                            </clipPath>
+                            <g clip-path="url(#top-glass)">
+                                <rect x="0" y="0" width="100" height="75" fill="#2A9D8F" class="hg-sand-top"/>
+                            </g>
+
+                            <!-- Sand Bottom (Clip Path) -->
+                            <clipPath id="bottom-glass">
+                                <path d="M 15 145 L 85 145 C 85 145, 75 125, 50 88 C 25 125, 15 145, 15 145 Z"/>
+                            </clipPath>
+                            <g clip-path="url(#bottom-glass)">
+                                <rect x="0" y="85" width="100" height="65" fill="#2A9D8F" class="hg-sand-bottom"/>
+                            </g>
+
+                            <!-- Sand stream -->
+                            <line x1="50" y1="75" x2="50" y2="140" stroke="#2A9D8F" stroke-width="4" class="hg-stream" stroke-linecap="round"/>
+
+                            <!-- Glass Shape Outline (Minimalist, K-inspired) -->
+                            <path d="M 10 10 L 90 10 C 90 10, 80 40, 50 76.5 C 20 40, 10 10, 10 10 Z" fill="none" stroke="#453F78" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M 10 150 L 90 150 C 90 150, 80 120, 50 83.5 C 20 120, 10 150, 10 150 Z" fill="none" stroke="#453F78" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                    </svg>
                 </div>
-                <div style="padding: 20px;">
-                    <h3 style="color: #453F78; margin-bottom: 10px;">🛑 Límite al Scroll Infinito</h3>
-                    <p style="font-size: 1rem;">Las redes sociales están diseñadas para atraparte. 15 minutos es el "punto dulce": suficiente para revisar, responder y disfrutar, pero lo bastante corto para evitar caer en el "agujero negro" del consumo pasivo de dopamina.</p>
+            </div>
+            <div class="w-full md:w-1/2 space-y-6">
+                <h2 class="text-4xl font-extrabold text-primary" data-i18n="sci_title">¿Por qué recreos de 15 minutos?
+                </h2>
+                <p class="text-xl text-dark-navy/80 font-medium leading-relaxed">
+                    <span data-i18n="sci_subtitle">No es un número al azar. Está diseñado según cómo funciona tu
+                        cerebro, basándonos en los </span><span
+                        class="text-accent-orange font-bold px-1 bg-accent-orange/10 rounded"
+                        data-i18n="sci_highlight">Ritmos Ultradianos</span>.
+                </p>
+                <div class="space-y-4 pt-2">
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-accent-orange mt-1">waves</span>
+                        <div>
+                            <p class="font-extrabold text-primary" data-i18n="sci_1_title">Respeta tu biología</p>
+                            <p class="text-dark-navy/70 text-sm"><span data-i18n="sci_1_desc">El cerebro funciona en
+                                    ciclos de energía de aprox. 90 minutos y exige un descanso vital para recargar
+                                    neurotransmisores.</span></p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-accent-orange mt-1">battery_charging_full</span>
+                        <div>
+                            <p class="font-extrabold text-primary" data-i18n="sci_2_title">Restaura la atención</p>
+                            <p class="text-dark-navy/70 text-sm"><span data-i18n="sci_2_desc">Las "micro-pausas"
+                                    cronometradas previenen la fatiga de decisión, manteniendo tu rendimiento alto todo
+                                    el día.</span></p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-accent-orange mt-1">block</span>
+                        <div>
+                            <p class="font-extrabold text-primary" data-i18n="sci_3_title">Límite al Scroll Infinito</p>
+                            <p class="text-dark-navy/70 text-sm"><span data-i18n="sci_3_desc">15 minutos es el "punto
+                                    dulce": suficiente para revisar, pero corto para no caer en el agujero pasivo de la
+                                    dopamina.</span></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
+    <!-- NotebookLM Science Impact Section -->
+    <section class="py-24 px-6 relative bg-white" id="science-impact">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 space-y-4">
+                <div class="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary font-bold text-sm tracking-wide mb-2 uppercase"
+                    data-i18n="sci_impact_badge">
+                    Respaldado por la ciencia
+                </div>
+                <h2 class="text-4xl font-extrabold text-primary" data-i18n="sci_impact_title">El impacto de ganar tiempo</h2>
+                <p class="text-dark-navy/60 font-medium max-w-2xl mx-auto" data-i18n="sci_impact_subtitle">Investigaciones recientes demuestran que limitar el uso del celular y reducir el scroll pasivo genera cambios profundos y medibles en tu biología.</p>
+            </div>
 
-        <footer>
-            <p>&copy; 2025 Kairos - Desarrollado por TwoCat Digital</p>
-            <p style="margin-top: 10px;">
-                <a href="privacy-policy.html">Política de Privacidad</a> |
-                <a href="mailto:twocatdigital.io@gmail.com">Contacto</a>
-            </p>
-        </footer>
-    </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Research Card 1 -->
+                <div class="bg-background-light p-8 rounded-2xl border border-primary/5 hover:border-accent-green/30 transition-[border-color,box-shadow,transform] hover:shadow-xl hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-accent-green/10 text-accent-green rounded-full flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-2xl">bedtime</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-primary mb-3" data-i18n="sci_res_1_title">Duerme más y mejor</h3>
+                    <p class="text-dark-navy/70 leading-relaxed font-medium text-sm" data-i18n="sci_res_1_desc">
+                        Reducir el uso de redes a 30 minutos mejora la calidad y duración del descanso. Estudios demuestran que limitar el tiempo de pantalla te hace ganar hasta <b>45 minutos</b> de sueño extra cada noche.
+                    </p>
+                </div>
+                
+                <!-- Research Card 2 -->
+                <div class="bg-background-light p-8 rounded-2xl border border-primary/5 hover:border-accent-orange/30 transition-[border-color,box-shadow,transform] hover:shadow-xl hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-accent-orange/10 text-accent-orange rounded-full flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-2xl">sentiment_satisfied</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-primary mb-3" data-i18n="sci_res_2_title">Dispara tu bienestar</h3>
+                    <p class="text-dark-navy/70 leading-relaxed font-medium text-sm" data-i18n="sci_res_2_desc">
+                        La ciencia confirma que desconectarse reduce drásticamente la ansiedad. Limitar el tiempo frente a la pantalla tiene un impacto directo en el aumento de la <b>felicidad</b> y tu satisfacción general con la vida.
+                    </p>
+                </div>
+
+                <!-- Research Card 3 -->
+                <div class="bg-background-light p-8 rounded-2xl border border-primary/5 hover:border-primary/30 transition-[border-color,box-shadow,transform] hover:shadow-xl hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-2xl">science</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-primary mb-3" data-i18n="sci_res_3_title">Química a tu favor</h3>
+                    <p class="text-dark-navy/70 leading-relaxed font-medium text-sm" data-i18n="sci_res_3_desc">
+                        Menos pantalla significa menos estrés biológico. Las reducciones en el uso del teléfono disminuyen los niveles de <b>cortisol</b> (la hormona del estrés) hasta en un <b>18%</b>, dándote una mente mucho más clara.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="py-24 px-6 bg-background-light" id="testimonials">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 space-y-4">
+                <h2 class="text-4xl font-extrabold text-primary" data-i18n="tst_title">Lo que dicen nuestros usuarios
+                </h2>
+                <p class="text-dark-navy/60 font-medium max-w-2xl mx-auto" data-i18n="tst_subtitle">Experiencias reales
+                    de personas que recuperaron el control de su tiempo.</p>
+            </div>
+            <div class="overflow-hidden rounded-2xl">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="bg-pure-white p-8 rounded-2xl shadow-premium border border-primary/5 h-full mx-2">
+                            <div class="flex items-center gap-1 mb-4">
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                            </div>
+                            <p class="text-dark-navy/80 leading-relaxed mb-6 italic" data-i18n="tst_1">
+                                &ldquo;Mi productividad se fue para arriba. Venía jugando un juego varias horas
+                                por día y con Kairos perdí el interés. Ahora estoy concentrado en mis próximos
+                                pasos y trabajando en lo que realmente importa.&rdquo;
+                            </p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm"
+                                    data-i18n="tst_1_init">
+                                    ML
+                                </div>
+                                <div>
+                                    <p class="font-bold text-primary text-sm" data-i18n="tst_1_name">Mariano L.</p>
+                                    <p class="text-dark-navy/50 text-xs" data-i18n="tst_1_role">Emprendedor tech</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="bg-pure-white p-8 rounded-2xl shadow-premium border border-primary/5 h-full mx-2">
+                            <div class="flex items-center gap-1 mb-4">
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                            </div>
+                            <p class="text-dark-navy/80 leading-relaxed mb-6 italic" data-i18n="tst_2">
+                                &ldquo;Recuperé horas para practicar bajo y estudiar teoría musical. Con el
+                                tiempo que me sobra estuve a full con videos de teoría para realmente dominar
+                                el instrumento. Kairos me devolvió mis hobbies.&rdquo;
+                            </p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-accent-green text-white flex items-center justify-center font-bold text-sm"
+                                    data-i18n="tst_2_init">
+                                    DG
+                                </div>
+                                <div>
+                                    <p class="font-bold text-primary text-sm" data-i18n="tst_2_name">Diego G.</p>
+                                    <p class="text-dark-navy/50 text-xs" data-i18n="tst_2_role">Músico & freelancer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <div class="bg-pure-white p-8 rounded-2xl shadow-premium border border-primary/5 h-full mx-2">
+                            <div class="flex items-center gap-1 mb-4">
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                            </div>
+                            <p class="text-dark-navy/80 leading-relaxed mb-6 italic" data-i18n="tst_3">
+                                &ldquo;La duración de los recreos es excelente. Una muy buena dosis de redes
+                                bien aprovechada. Calculo estar viendo una hora al día, bastante menos que
+                                antes. Y no extraño para nada. Punto extra para la batería de mi
+                                teléfono.&rdquo;
+                            </p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-accent-orange text-white flex items-center justify-center font-bold text-sm"
+                                    data-i18n="tst_3_init">
+                                    SC
+                                </div>
+                                <div>
+                                    <p class="font-bold text-primary text-sm" data-i18n="tst_3_name">Sofía C.</p>
+                                    <p class="text-dark-navy/50 text-xs" data-i18n="tst_3_role">Profesional
+                                        independiente</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel Dots (mobile only) -->
+            <div class="flex justify-center gap-3 mt-8 md:hidden">
+                <button class="carousel-dot active" onclick="goToSlide(0)" aria-label="Ver testimonio 1"></button>
+                <button class="carousel-dot" onclick="goToSlide(1)" aria-label="Ver testimonio 2"></button>
+                <button class="carousel-dot" onclick="goToSlide(2)" aria-label="Ver testimonio 3"></button>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing Section -->
+    <section class="py-24 px-6 bg-pure-white" id="pricing">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 space-y-4">
+                <div class="inline-block px-4 py-1 rounded-full bg-accent-orange/10 text-accent-orange font-bold text-sm tracking-wide mb-2 uppercase"
+                    data-i18n="pri_badge">
+                    PROMO LANZAMIENTO - 50% OFF
+                </div>
+                <h2 class="text-4xl font-extrabold text-primary" data-i18n="pri_title">Elige tu nivel de compromiso</h2>
+                <p class="text-dark-navy/60 font-medium max-w-2xl mx-auto" data-i18n="pri_subtitle">Buscamos un impacto
+                    real, no una suscripción eterna. Adquiere créditos y recupera tu enfoque.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Pack 1 -->
+                <div
+                    class="group bg-background-light p-8 rounded-3xl border border-primary/5 hover:border-accent-orange/30 transition-[border-color,box-shadow,transform] hover:shadow-2xl hover:-translate-y-2">
+                    <p class="text-accent-orange font-bold text-xs uppercase tracking-widest mb-4"
+                        data-i18n="pri_1_tag">Pack Esencial</p>
+                    <h3 class="text-3xl font-black text-primary mb-2" data-i18n="pri_1_cnt">10 Créditos</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-4xl font-black text-primary" data-i18n="pri_1_prc">$0.49</span>
+                    </div>
+                    <p class="text-dark-navy/60 text-sm mb-8 italic leading-relaxed" data-i18n="pri_1_desc">Ideal para
+                        tu primera semana de enfoque consciente.</p>
+                    <a href="#download"
+                        class="block text-center py-4 px-6 rounded-xl bg-primary/5 text-primary font-bold hover:bg-primary hover:text-white transition-colors"
+                        data-i18n="pri_buy">Ver en la App</a>
+                </div>
+                <!-- Pack 2 (Featured) -->
+                <div
+                    class="group bg-primary p-8 rounded-3xl border-2 border-accent-orange shadow-2xl scale-105 relative z-10 hover:-translate-y-2 transition-transform">
+                    <div
+                        class="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent-orange text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-lg"
+                        data-i18n="pri_popular">POPULAR</div>
+                    <p class="text-accent-orange font-bold text-xs uppercase tracking-widest mb-4"
+                        data-i18n="pri_2_tag">Pack Recomendado</p>
+                    <h3 class="text-3xl font-black text-white mb-2" data-i18n="pri_2_cnt">50 Créditos</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-4xl font-black text-white" data-i18n="pri_2_prc">$1.49</span>
+                    </div>
+                    <p class="text-white/60 text-sm mb-8 italic leading-relaxed" data-i18n="pri_2_desc">Forma un hábito
+                        sólido y duradero.</p>
+                    <a href="#download"
+                        class="block text-center py-4 px-6 rounded-xl bg-accent-orange text-white font-bold hover:bg-opacity-90 transition-colors shadow-lg shadow-accent-orange/20"
+                        data-i18n="pri_buy">Ver en la App</a>
+                </div>
+                <!-- Pack 3 -->
+                <div
+                    class="group bg-background-light p-8 rounded-3xl border border-primary/5 hover:border-accent-orange/30 transition-[border-color,box-shadow,transform] hover:shadow-2xl hover:-translate-y-2">
+                    <p class="text-accent-orange font-bold text-xs uppercase tracking-widest mb-4"
+                        data-i18n="pri_3_tag">Pack Maestro</p>
+                    <h3 class="text-3xl font-black text-primary mb-2" data-i18n="pri_3_cnt">100 Créditos</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-4xl font-black text-primary" data-i18n="pri_3_prc">$2.49</span>
+                    </div>
+                    <p class="text-dark-navy/60 text-sm mb-8 italic leading-relaxed" data-i18n="pri_3_desc">Máximo valor
+                        para el dominio total de tu tiempo.</p>
+                    <a href="#download"
+                        class="block text-center py-4 px-6 rounded-xl bg-primary/5 text-primary font-bold hover:bg-primary hover:text-white transition-colors"
+                        data-i18n="pri_buy">Ver en la App</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-6" id="download">
+        <div
+            class="max-w-4xl mx-auto bg-primary rounded-3xl p-12 text-center text-white shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full -translate-x-16 -translate-y-16"></div>
+            <div
+                class="absolute bottom-0 right-0 w-48 h-48 bg-accent-orange/20 rounded-full translate-x-20 translate-y-20">
+            </div>
+            <h2 class="text-4xl font-extrabold mb-6 relative z-10" data-i18n="cta_title">¿Listo para recuperar tu vida?
+            </h2>
+            <p class="text-xl text-white/80 mb-10 max-w-xl mx-auto relative z-10" data-i18n="cta_subtitle">Descarga la
+                app y da el primer paso hacia una relación saludable con tu tecnología.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                <a href="#" aria-label="Descargar Kairos para Android"
+                    class="bg-accent-green hover:bg-opacity-90 text-white px-10 py-5 rounded-xl font-extrabold text-xl shadow-xl shadow-black/10 transition-transform transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-2xl">android</span>
+                    <span data-i18n="cta_btn">Instalar Kairos (Gratis)</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-primary text-white pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <img src="k-icon.png" alt="Kairos Icon" class="h-12 w-12 object-contain rounded-xl" />
+                        <span class="text-3xl font-black tracking-tight text-white">Kairos</span>
+                    </div>
+                    <p class="text-white/60 max-w-sm leading-relaxed">
+                        <span data-i18n="ft_desc">Rediseñamos el futuro del bienestar digital a través de la psicología
+                            aplicada y el diseño consciente.</span>
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6" data-i18n="ft_contact">Contacto</h4>
+                    <p class="text-white/60 hover:text-white transition-colors cursor-pointer mb-2">
+                        twocatdigital.io@gmail.com</p>
+                    <div class="flex gap-4 mt-6">
+                        <div
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 cursor-pointer">
+                            <span class="material-symbols-outlined">alternate_email</span>
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 cursor-pointer">
+                            <span class="material-symbols-outlined">share</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6" data-i18n="ft_company">Empresa</h4>
+                    <ul class="space-y-3 text-white/60">
+                        <li><a class="hover:text-white transition-colors" href="privacy.html" data-i18n="ft_privacy">Privacidad</a>
+                        </li>
+                        <li><a class="hover:text-white transition-colors" href="#" data-i18n="ft_terms">Términos</a>
+                        </li>
+                        <li><a class="hover:text-white transition-colors" href="#" data-i18n="ft_blog">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-sm">
+                <p data-i18n="ft_rights">© 2026 Kairos App. Todos los derechos reservados.</p>
+                <p>Developed by <a href="#"
+                        class="text-white font-bold hover:underline focus-visible:ring-2 focus-visible:ring-white rounded">TwoCat
+                        Digital</a></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Testimonials Carousel (mobile)
+        let currentSlide = 0;
+        const track = document.getElementById('testimonialTrack');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function goToSlide(index) {
+            currentSlide = index;
+            if (track) {
+                track.style.transform = `translateX(-${index * 100}%)`;
+            }
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Auto-advance on mobile every 5s
+        if (window.innerWidth < 768) {
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % 3;
+                goToSlide(currentSlide);
+            }, 5000);
+        }
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        if (track) {
+            track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+            track.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0 && currentSlide < 2) goToSlide(currentSlide + 1);
+                    if (diff < 0 && currentSlide > 0) goToSlide(currentSlide - 1);
+                }
+            }, { passive: true });
+        }
+    </script>
+    <script>
+        // === Gallery Navigation ===
+        const galleryTrack = document.getElementById('galleryTrack');
+        
+        function scrollGallery(direction) {
+            if (!galleryTrack) return;
+            const item = galleryTrack.querySelector('.gallery-item');
+            const itemWidth = item ? item.offsetWidth + 24 : 344;
+            galleryTrack.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+        }
+    </script>
+    <script src="translate.js"></script>
 </body>
 
 </html>
