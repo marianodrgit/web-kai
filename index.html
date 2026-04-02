@@ -124,13 +124,20 @@
         /* Testimonials Carousel */
         .testimonial-track {
             display: flex;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Firefox */
+            scroll-behavior: smooth;
+        }
+        .testimonial-track::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
         }
 
         .testimonial-card {
             min-width: 100%;
             padding: 0 1rem;
             box-sizing: border-box;
+            scroll-snap-align: center;
         }
 
         @media (min-width: 768px) {
@@ -179,19 +186,24 @@
             mask-image: url('data:image/svg+xml;utf8,<svg ...></svg>'); /* Potential mask to fit phone frame if needed */
             border-radius: 1.8rem;
         }
+
+        .star-filled {
+            font-variation-settings: 'FILL' 1;
+        }
     </style>
 </head>
 
 <body
-    class="bg-background-light dark:bg-background-dark text-dark-navy dark:text-slate-100 font-display selection:bg-primary/20 relative overflow-x-hidden">
+    class="bg-background-light dark:bg-background-dark text-dark-navy dark:text-slate-100 font-display selection:bg-primary/20">
+    <div class="overflow-x-hidden w-full relative min-h-screen">
     <div class="blob top-0 left-0"></div>
     <div class="blob bottom-0 right-0" style="animation-delay: -10s; background: radial-gradient(circle, rgba(42, 157, 143, 0.1) 0%, rgba(42, 157, 143, 0) 70%);"></div>
     <!-- Sticky Navbar -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-primary/5">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2 transition-transform hover:-translate-y-1 hover:cursor-pointer">
-                <img src="logo_horizontal.png" alt="Kairos Branding" width="200" height="80" fetchpriority="high"
-                    class="h-16 md:h-20 scale-[1.6] md:scale-[2.0] origin-left w-auto object-contain" />
+            <div class="flex items-center gap-2 transition-transform hover:-translate-y-1 hover:cursor-pointer py-2">
+                <img src="logo_horizontal.png" alt="Kairos Branding" fetchpriority="high"
+                    class="h-12 md:h-16 w-auto object-contain scale-[1.3] origin-left" />
             </div>
             <div class="hidden md:flex items-center gap-8 font-medium">
                 <a class="hover:text-primary transition-colors hover:cursor-pointer"
@@ -206,7 +218,7 @@
                     <button id="btn-lang-en" onclick="setLanguage('en')"
                         class="text-dark-navy/50 hover:text-primary transition-colors">EN</button>
                 </div>
-                <a href="#download"
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
                     class="bg-accent-green hover:bg-opacity-90 text-white px-6 py-2.5 rounded-full font-bold transition-transform transform hover:scale-105 active:scale-95 shadow-lg shadow-accent-green/20">
                     <span data-i18n="nav_download">Descargar para Android</span>
                 </a>
@@ -240,7 +252,7 @@
                         hacer scroll automático y empieces a elegir conscientemente.</span>
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <a href="#download"
+                    <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
                         class="bg-accent-green hover:bg-opacity-90 text-white px-8 py-4 rounded-xl font-extrabold text-lg transition-transform transform hover:-translate-y-1 shadow-xl shadow-accent-green/20 flex items-center justify-center gap-2">
                         <span class="material-symbols-outlined">android</span>
                         <span data-i18n="nav_download">Descargar para Android</span>
@@ -328,7 +340,7 @@
                     </div>
                     <h3 class="text-2xl font-extrabold text-primary mb-4" data-i18n="feat_2_title">Presupuesto de Ocio</h3>
                     <p class="text-dark-navy/70 leading-relaxed font-medium" data-i18n="feat_2_desc">
-                        Recibes 2 créditos gratis al día. Si quieres tomar un recreo consecutivo, te costará más caro.
+                        Recibes 4 coins diarios. Si quieres tomar un recreo consecutivo, te costará más caro.
                         Perder el tiempo pasa a ser un lujo, no un acto reflejo.
                     </p>
                 </div>
@@ -417,7 +429,7 @@
             <div class="w-full md:w-1/2 relative">
                 <div class="absolute -inset-10 bg-gradient-to-r from-accent-green/20 to-primary/20 rounded-full blur-3xl opacity-50 z-0 animate-pulse-slow"></div>
                 <div class="relative z-10 w-full aspect-square max-w-[400px] mx-auto flex justify-center items-center rounded-full bg-white/50 backdrop-blur-xl border border-white shadow-[0_20px_60px_-15px_rgba(69,63,120,0.15)] transition-transform hover:scale-105 duration-500">
-                    <svg class="w-[160px] h-[160px] max-w-full drop-shadow-2xl" viewBox="0 0 100 160" overflow="visible">
+                    <svg class="w-[160px] h-[160px] max-w-full drop-shadow-2xl" viewBox="0 0 100 160" overflow="hidden">
                         <style>
                             @keyframes hourglass-spin {
                                 0%, 80% { transform: rotate(0deg); }
@@ -439,7 +451,17 @@
                             .hg-container {
                                 /* FIX: Exact pixel center prevents lateral drift during rotation */
                                 transform-origin: 50px 80px;
+                                -webkit-transform-style: preserve-3d;
+                                transform-style: preserve-3d;
+                                -webkit-backface-visibility: hidden;
+                                backface-visibility: hidden;
+                                transform: translate3d(0,0,0);
+                                will-change: transform;
                                 animation: hourglass-spin 4s ease-in-out infinite;
+                            }
+                            .hg-container * {
+                                -webkit-backface-visibility: hidden;
+                                backface-visibility: hidden;
                             }
                             .hg-sand-top {
                                 transform-origin: 50px 75px;
@@ -454,10 +476,9 @@
                                 animation: stream-drop 4s linear infinite;
                             }
                         </style>
+                        <!-- Background glow removed to eliminate oval artifact -->
+                        
                         <g class="hg-container">
-                            <!-- Background accent glow -->
-                            <ellipse cx="50" cy="80" rx="30" ry="60" fill="rgba(42, 157, 143, 0.05)" />
-                            
                             <!-- Sand Top (Clip Path) -->
                             <clipPath id="top-glass">
                                 <path d="M 15 15 L 85 15 C 85 15, 75 35, 50 72 C 25 35, 15 15, 15 15 Z"/>
@@ -517,7 +538,7 @@
                         <div>
                             <p class="font-extrabold text-primary" data-i18n="sci_3_title">Límite al Scroll Infinito</p>
                             <p class="text-dark-navy/70 text-sm"><span data-i18n="sci_3_desc">15 minutos es el "punto
-                                    dulce": suficiente para revisar, pero corto para no caer en el agujero pasivo de la
+                                    dulce": suficiente para despejarse, pero corto para no caer en el agujero pasivo de la
                                     dopamina.</span></p>
                         </div>
                     </div>
@@ -588,11 +609,11 @@
                     <div class="testimonial-card">
                         <div class="bg-pure-white p-8 rounded-2xl shadow-premium border border-primary/5 h-full mx-2">
                             <div class="flex items-center gap-1 mb-4">
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
                             </div>
                             <p class="text-dark-navy/80 leading-relaxed mb-6 italic" data-i18n="tst_1">
                                 &ldquo;Mi productividad se fue para arriba. Venía jugando un juego varias horas
@@ -615,11 +636,11 @@
                     <div class="testimonial-card">
                         <div class="bg-pure-white p-8 rounded-2xl shadow-premium border border-primary/5 h-full mx-2">
                             <div class="flex items-center gap-1 mb-4">
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
                             </div>
                             <p class="text-dark-navy/80 leading-relaxed mb-6 italic" data-i18n="tst_2">
                                 &ldquo;Recuperé horas para practicar bajo y estudiar teoría musical. Con el
@@ -642,11 +663,11 @@
                     <div class="testimonial-card">
                         <div class="bg-pure-white p-8 rounded-2xl shadow-premium border border-primary/5 h-full mx-2">
                             <div class="flex items-center gap-1 mb-4">
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
-                                <span class="material-symbols-outlined text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
+                                <span class="material-symbols-outlined star-filled text-accent-orange text-xl">star</span>
                             </div>
                             <p class="text-dark-navy/80 leading-relaxed mb-6 italic" data-i18n="tst_3">
                                 &ldquo;La duración de los recreos es excelente. Una muy buena dosis de redes
@@ -702,7 +723,7 @@
                     </div>
                     <p class="text-dark-navy/60 text-sm mb-8 italic leading-relaxed" data-i18n="pri_1_desc">Ideal para
                         tu primera semana de enfoque consciente.</p>
-                    <a href="#download"
+                    <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
                         class="block text-center py-4 px-6 rounded-xl bg-primary/5 text-primary font-bold hover:bg-primary hover:text-white transition-colors"
                         data-i18n="pri_buy">Ver en la App</a>
                 </div>
@@ -720,7 +741,7 @@
                     </div>
                     <p class="text-white/60 text-sm mb-8 italic leading-relaxed" data-i18n="pri_2_desc">Forma un hábito
                         sólido y duradero.</p>
-                    <a href="#download"
+                    <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
                         class="block text-center py-4 px-6 rounded-xl bg-accent-orange text-white font-bold hover:bg-opacity-90 transition-colors shadow-lg shadow-accent-orange/20"
                         data-i18n="pri_buy">Ver en la App</a>
                 </div>
@@ -735,7 +756,7 @@
                     </div>
                     <p class="text-dark-navy/60 text-sm mb-8 italic leading-relaxed" data-i18n="pri_3_desc">Máximo valor
                         para el dominio total de tu tiempo.</p>
-                    <a href="#download"
+                    <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
                         class="block text-center py-4 px-6 rounded-xl bg-primary/5 text-primary font-bold hover:bg-primary hover:text-white transition-colors"
                         data-i18n="pri_buy">Ver en la App</a>
                 </div>
@@ -756,10 +777,10 @@
             <p class="text-xl text-white/80 mb-10 max-w-xl mx-auto relative z-10" data-i18n="cta_subtitle">Descarga la
                 app y da el primer paso hacia una relación saludable con tu tecnología.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-                <a href="#" aria-label="Descargar Kairos para Android"
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener" aria-label="Descargar Kairos para Android"
                     class="bg-accent-green hover:bg-opacity-90 text-white px-10 py-5 rounded-xl font-extrabold text-xl shadow-xl shadow-black/10 transition-transform transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
                     <span class="material-symbols-outlined text-2xl">android</span>
-                    <span data-i18n="cta_btn">Instalar Kairos (Gratis)</span>
+                    <span data-i18n="cta_btn">Instalar Kairos</span>
                 </a>
             </div>
         </div>
@@ -783,14 +804,10 @@
                     <p class="text-white/60 hover:text-white transition-colors cursor-pointer mb-2">
                         twocatdigital.io@gmail.com</p>
                     <div class="flex gap-4 mt-6">
-                        <div
-                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 cursor-pointer">
-                            <span class="material-symbols-outlined">alternate_email</span>
-                        </div>
-                        <div
-                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 cursor-pointer">
-                            <span class="material-symbols-outlined">share</span>
-                        </div>
+                        <a href="mailto:twocatdigital.io@gmail.com"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 cursor-pointer transition-colors">
+                            <span class="material-symbols-outlined">mail</span>
+                        </a>
                     </div>
                 </div>
                 <div>
@@ -798,9 +815,8 @@
                     <ul class="space-y-3 text-white/60">
                         <li><a class="hover:text-white transition-colors" href="privacy.html" data-i18n="ft_privacy">Privacidad</a>
                         </li>
-                        <li><a class="hover:text-white transition-colors" href="#" data-i18n="ft_terms">Términos</a>
+                        <li><a class="hover:text-white transition-colors" href="terms.html" data-i18n="ft_terms">Términos</a>
                         </li>
-                        <li><a class="hover:text-white transition-colors" href="#" data-i18n="ft_blog">Blog</a></li>
                     </ul>
                 </div>
             </div>
@@ -813,43 +829,32 @@
             </div>
         </div>
     </footer>
+    </div>
     <script>
-        // Testimonials Carousel (mobile)
-        let currentSlide = 0;
+        // Testimonials Carousel (mobile) Native Scroll
         const track = document.getElementById('testimonialTrack');
         const dots = document.querySelectorAll('.carousel-dot');
 
         function goToSlide(index) {
-            currentSlide = index;
             if (track) {
-                track.style.transform = `translateX(-${index * 100}%)`;
+                const cardWidth = track.clientWidth;
+                track.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
             }
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
+        }
+
+        if (track && window.IntersectionObserver) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = Array.from(track.children).indexOf(entry.target);
+                        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+                    }
+                });
+            }, {
+                root: track,
+                threshold: 0.5
             });
-        }
-
-        // Auto-advance on mobile every 5s
-        if (window.innerWidth < 768) {
-            setInterval(() => {
-                currentSlide = (currentSlide + 1) % 3;
-                goToSlide(currentSlide);
-            }, 5000);
-        }
-
-        // Touch swipe support
-        let touchStartX = 0;
-        let touchEndX = 0;
-        if (track) {
-            track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-            track.addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0 && currentSlide < 2) goToSlide(currentSlide + 1);
-                    if (diff < 0 && currentSlide > 0) goToSlide(currentSlide - 1);
-                }
-            }, { passive: true });
+            Array.from(track.children).forEach(child => observer.observe(child));
         }
     </script>
     <script>
