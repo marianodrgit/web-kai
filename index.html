@@ -7,6 +7,15 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Kairos - Recupera tu Bienestar Digital</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BS0P92FS7S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BS0P92FS7S');
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&amp;display=swap"
         rel="stylesheet" />
     <link
@@ -211,6 +220,8 @@
                     data-i18n="nav_features">Características</a>
                 <a class="hover:text-primary transition-colors hover:cursor-pointer"
                     aria-label="Ir a la sección de La Ciencia" href="#science" data-i18n="nav_science">La Ciencia</a>
+                <a class="hover:text-primary transition-colors hover:cursor-pointer"
+                    href="blog.html">Blog</a>
                 <div class="flex items-center gap-2 border-l border-dark-navy/10 pl-4">
                     <button id="btn-lang-es" onclick="setLanguage('es')"
                         class="font-bold text-primary hover:text-primary transition-colors">ES</button>
@@ -813,6 +824,7 @@
                 <div>
                     <h4 class="font-bold text-lg mb-6" data-i18n="ft_company">Empresa</h4>
                     <ul class="space-y-3 text-white/60">
+                        <li><a class="hover:text-white transition-colors" href="blog.html">Blog</a></li>
                         <li><a class="hover:text-white transition-colors" href="privacy.html" data-i18n="ft_privacy">Privacidad</a>
                         </li>
                         <li><a class="hover:text-white transition-colors" href="terms.html" data-i18n="ft_terms">Términos</a>
