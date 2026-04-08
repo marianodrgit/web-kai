@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Tu celular como refugio: el rol del estrés social oculto — Blog Kairos</title>
+    <meta name="description" content="Cómo la ansiedad de apego y las dificultades cotidianas se esconden detrás de nuestra compulsión a mirar la pantalla." />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Tu celular como refugio: el rol del estrés social oculto" />
+    <meta property="og:description" content="Cómo la ansiedad de apego y las dificultades cotidianas se esconden detrás de nuestra compulsión a mirar la pantalla." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://twocatdigital.github.io/KairosClean/blog/celular-como-refugio-ansiedad.html" />
+    <meta property="og:image" content="https://twocatdigital.github.io/KairosClean/k-icon.png" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BS0P92FS7S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BS0P92FS7S');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#453F78",
+                        "accent-green": "#2A9D8F",
+                        "accent-orange": "#E76F51",
+                        "soft-violet": "#D6D1F5",
+                        "calm-cream": "#F4F1DE",
+                        "ice-blue": "#E8F0FE",
+                        "dark-navy": "#1D3557",
+                        "background-light": "#E8F0FE",
+                        "pure-white": "#FEFEFE",
+                    },
+                    fontFamily: {
+                        "display": ["Roboto", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px rgba(69, 63, 120, 0.08)',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #E8F0FE;
+            color: #1D3557;
+        }
+
+        .glass-nav {
+            background: rgba(254, 254, 254, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Article typography */
+        .article-body h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #453F78;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-body p {
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: #1D3557cc;
+            margin-bottom: 1.25rem;
+        }
+
+        .article-body strong {
+            color: #1D3557;
+            font-weight: 700;
+        }
+
+        .article-body a {
+            color: #2A9D8F;
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-color: #2A9D8F40;
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.2s;
+        }
+
+        .article-body blockquote {
+            border-left: 4px solid #453F78;
+            background: #453F7808;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            font-style: italic;
+        }
+
+        .article-body ul {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .article-body li {
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: #1D3557cc;
+            margin-bottom: 0.5rem;
+            list-style-type: disc;
+        }
+
+        /* Callout box */
+        .callout {
+            background: linear-gradient(135deg, #2A9D8F10 0%, #453F7810 100%);
+            border: 1px solid #453F7815;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .callout-title {
+            font-weight: 800;
+            color: #453F78;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #reading-progress {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #453F78, #2A9D8F);
+            z-index: 100;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(69, 63, 120, 0.1) 0%, rgba(69, 63, 120, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(10%, 10%); }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-dark-navy font-display selection:bg-primary/20">
+    <div id="reading-progress" style="width: 0%"></div>
+
+    <div class="overflow-x-hidden w-full relative min-h-screen">
+    <div class="blob top-0 right-0"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-primary/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 transition-transform hover:-translate-y-1 py-2">
+                <img src="../logo_horizontal.png" alt="Kairos Branding" fetchpriority="high"
+                    class="h-12 md:h-16 w-auto object-contain scale-[1.3] origin-left" />
+            </a>
+            <div class="hidden md:flex items-center gap-8 font-medium">
+                <a class="hover:text-primary transition-colors" href="../index.html#features">Características</a>
+                <a class="hover:text-primary transition-colors" href="../index.html#science">La Ciencia</a>
+                <a class="text-primary font-bold border-b-2 border-primary pb-1" href="../blog.html">Blog</a>
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
+                    class="bg-accent-green hover:bg-opacity-90 text-white px-6 py-2.5 rounded-full font-bold transition-transform transform hover:scale-105 active:scale-95 shadow-lg shadow-accent-green/20">
+                    Descargar para Android
+                </a>
+            </div>
+            <div class="md:hidden text-primary flex items-center gap-4">
+                <a href="../blog.html" class="font-bold text-sm">Blog</a>
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
+                    class="bg-accent-green text-white px-4 py-2 rounded-full text-sm font-bold">
+                    Descargar
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-8 px-6">
+        <div class="max-w-3xl mx-auto space-y-6">
+            <div class="flex items-center gap-2 text-sm text-dark-navy/50 font-medium">
+                <a href="../blog.html" class="hover:text-primary transition-colors">Blog</a>
+                <span class="material-symbols-outlined text-sm">chevron_right</span>
+                <span class="text-primary font-bold">Bienestar</span>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs">
+                🌿 Bienestar
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-[1.15] tracking-tight text-primary">
+                Tu celular como refugio: el rol del estrés social oculto
+            </h1>
+            <p class="text-lg md:text-xl text-dark-navy/70 font-medium leading-relaxed">
+                Cómo la ansiedad de apego y las dificultades cotidianas se esconden detrás de nuestra compulsión a mirar la pantalla.
+            </p>
+            <div class="flex flex-wrap items-center gap-4 text-sm text-dark-navy/50 font-medium pt-2 border-t border-primary/5">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">K</div>
+                    <span>Kairos Team</span>
+                </div>
+                <span>·</span>
+                <span>8 Abril, 2026</span>
+                <span>·</span>
+                <span class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-base">schedule</span>
+                    3 min de lectura
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="px-6 pb-16">
+        <article class="max-w-3xl mx-auto">
+            <div class="bg-pure-white rounded-3xl p-8 md:p-12 shadow-premium border border-primary/5">
+                <div class="article-body">
+                    <p>
+                        Si te detenés a analizar los momentos en los que pasás más horas scrolleando sin sentido, es muy probable que encuentres un patrón que se repite. No suele suceder cuando estás feliz o disfrutando una charla excelente, sino más bien durante días grises, llenos de mudanzas, nuevas responsabilidades o fricciones relacionales.
+                    </p>
+                    <p>
+                        Cuando las cosas no se sienten del todo seguras en nuestro entorno real, nuestro cerebro tiene una tendencia automática a buscar "terreno firme". Y hoy en día, ese terreno predecible cabe en la palma de nuestras manos.
+                    </p>
+
+                    <h2>El estrés de adaptación como detonante</h2>
+                    <p>
+                        Solemos juzgar el uso problemático del celular como un exceso hedonista, pero raras veces lo comprendemos como lo que realmente suele ser: un escudo protector contra el mundo exterior. 
+                    </p>
+                    <p>
+                        Según <a href="https://doi.org/10.3389/fpsyg.2023.1126815" target="_blank">una investigación psicológica</a> sobre el comportamiento humano, el estrés sociocultural es uno de los predictores clave. Cuando las personas experimentan estrés de adaptación o ansiedad de apego, su consumo digital se dispara exponencialmente.
+                    </p>
+
+                    <div class="callout">
+                        <div class="callout-title">
+                            <span class="material-symbols-outlined text-accent-green">security</span>
+                            La ilusión de seguridad social
+                        </div>
+                        <p>El estudio destaca que, al experimentar estrés de apego relacional, nuestro cerebro utiliza las redes sociales como una respuesta para restaurar la seguridad. Ver likes y consumir un flujo constante que no exige nada a cambio actúa como un sustituto rápido del verdadero apego seguro que hoy nos está faltando en la vida física.</p>
+                    </div>
+
+                    <h2>¿Qué podés hacer con esto?</h2>
+                    <p>
+                        Entender tu teléfono como un refugio emocional cambia la forma en que abordas el impulso:
+                    </p>
+                    <ul>
+                        <li><strong>Tu tiempo en pantalla es un termómetro:</strong> Preguntate con honestidad: "¿De qué estrés o miedo me estuve refugiando esta semana?".</li>
+                        <li><strong>Separá el problema secundario del primario:</strong> Tu objetivo principal no es solo "usar menos el celular", sino identificar esa tensión relacional o laboral subyacente.</li>
+                        <li><strong>Restaurá el apego de a un paso:</strong> Intentá coordinar un encuentro sencillo de calidad con un amigo íntimo o dedicá espacio a un proyecto análogo que te devuelva esa seguridad extraviada.</li>
+                    </ul>
+
+                    <p>
+                        Identificar realmente qué lluvia es la que estamos intentando evadir nos ahorra grandes años de conflicto invisible. Estar bien también requiere apoyarnos tranquilamente en sistemas sutiles que propongan desconectarnos cuando lo más nutritivo sea salir directo allá afuera.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-6 bg-pure-white rounded-2xl p-6 shadow-premium border border-primary/5">
+                <div class="flex items-center gap-3">
+                    <span class="text-sm font-bold text-dark-navy/60">Compartir:</span>
+                    <a id="share-twitter" href="#" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary hover:text-white text-primary flex items-center justify-center transition-colors">𝕏</a>
+                    <a id="share-linkedin" href="#" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary hover:text-white text-primary flex items-center justify-center transition-colors">in</a>
+                    <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='✓ Copiado'" class="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary hover:text-white text-primary flex items-center justify-center transition-colors">
+                        <span class="material-symbols-outlined text-lg">link</span>
+                    </button>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
+                    class="inline-flex items-center gap-2 bg-accent-green hover:bg-opacity-90 text-white px-6 py-3 rounded-xl font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-accent-green/20 text-sm">
+                    <span class="material-symbols-outlined text-lg">android</span>
+                    Prueba Kairos gratis
+                </a>
+            </div>
+
+            <div class="mt-8 text-center">
+                <a href="../blog.html" class="inline-flex items-center gap-2 text-primary font-bold hover:underline transition-colors">
+                    <span class="material-symbols-outlined text-lg">arrow_back</span>
+                    Volver al Blog
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-primary text-white pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <img src="../k-icon.png" alt="Kairos Icon" class="h-12 w-12 object-contain rounded-xl" />
+                        <span class="text-3xl font-black tracking-tight text-white">Kairos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = window.scrollY;
+            const progress = Math.min((scrolled / docHeight) * 100, 100);
+            document.getElementById('reading-progress').style.width = progress + '%';
+        });
+    </script>
+</body>
+</html>
