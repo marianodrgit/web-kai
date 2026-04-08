@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>¿Qué es exactamente la adicción al celular? — Blog Kairos</title>
+    <meta name="description" content="Mucho se habla de adicción al celular. Poco se explica qué significa realmente. La ciencia tiene una respuesta clara: no depende de las horas." />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="¿Qué es exactamente la adicción al celular?" />
+    <meta property="og:description" content="Mucho se habla de adicción al celular. Poco se explica qué significa realmente. La ciencia tiene una respuesta clara: no depende de las horas." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://twocatdigital.github.io/kairos-web/blog/adiccion-celular-que-es.html" />
+    <meta property="og:image" content="https://twocatdigital.github.io/kairos-web/k-icon.png" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BS0P92FS7S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BS0P92FS7S');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#453F78",
+                        "accent-green": "#2A9D8F",
+                        "accent-orange": "#E76F51",
+                        "soft-violet": "#D6D1F5",
+                        "calm-cream": "#F4F1DE",
+                        "ice-blue": "#E8F0FE",
+                        "dark-navy": "#1D3557",
+                        "background-light": "#E8F0FE",
+                        "pure-white": "#FEFEFE",
+                    },
+                    fontFamily: {
+                        "display": ["Roboto", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px rgba(69, 63, 120, 0.08)',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #E8F0FE;
+            color: #1D3557;
+        }
+
+        .glass-nav {
+            background: rgba(254, 254, 254, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .article-body h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #453F78;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-body h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #453F78;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .article-body p {
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: #1D3557cc;
+            margin-bottom: 1.25rem;
+        }
+
+        .article-body strong {
+            color: #1D3557;
+            font-weight: 700;
+        }
+
+        .article-body a {
+            color: #2A9D8F;
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-color: #2A9D8F40;
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.2s;
+        }
+
+        .article-body a:hover {
+            text-decoration-color: #2A9D8F;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .article-body li {
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: #1D3557cc;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-body ul li {
+            list-style-type: disc;
+        }
+
+        .article-body ol li {
+            list-style-type: decimal;
+        }
+
+        .article-body blockquote {
+            border-left: 4px solid #453F78;
+            background: #453F7808;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            font-style: italic;
+        }
+
+        .article-body blockquote p {
+            margin-bottom: 0;
+            color: #1D3557;
+        }
+
+        .callout {
+            background: linear-gradient(135deg, #2A9D8F10 0%, #453F7810 100%);
+            border: 1px solid #453F7815;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .callout-title {
+            font-weight: 800;
+            color: #453F78;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #reading-progress {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #453F78, #2A9D8F);
+            z-index: 100;
+            transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(69, 63, 120, 0.1) 0%, rgba(69, 63, 120, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(10%, 10%); }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-dark-navy font-display selection:bg-primary/20">
+    <div id="reading-progress" style="width: 0%"></div>
+
+    <div class="overflow-x-hidden w-full relative min-h-screen">
+    <div class="blob top-0 right-0"></div>
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-primary/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 transition-transform hover:-translate-y-1 py-2">
+                <img src="../logo_horizontal.png" alt="Kairos Branding" fetchpriority="high"
+                    class="h-12 md:h-16 w-auto object-contain scale-[1.3] origin-left" />
+            </a>
+            <div class="hidden md:flex items-center gap-8 font-medium">
+                <a class="hover:text-primary transition-colors" href="../index.html#features">Características</a>
+                <a class="hover:text-primary transition-colors" href="../index.html#science">La Ciencia</a>
+                <a class="text-primary font-bold border-b-2 border-primary pb-1" href="../blog.html">Blog</a>
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
+                    class="bg-accent-green hover:bg-opacity-90 text-white px-6 py-2.5 rounded-full font-bold transition-transform transform hover:scale-105 active:scale-95 shadow-lg shadow-accent-green/20">
+                    Descargar para Android
+                </a>
+            </div>
+            <div class="md:hidden text-primary flex items-center gap-4">
+                <a href="../blog.html" class="font-bold text-sm">Blog</a>
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
+                    class="bg-accent-green text-white px-4 py-2 rounded-full text-sm font-bold">
+                    Descargar
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="pt-32 pb-8 px-6">
+        <div class="max-w-3xl mx-auto space-y-6">
+            <div class="flex items-center gap-2 text-sm text-dark-navy/50 font-medium">
+                <a href="../blog.html" class="hover:text-primary transition-colors">Blog</a>
+                <span class="material-symbols-outlined text-sm">chevron_right</span>
+                <span class="text-primary font-bold">Ciencia</span>
+            </div>
+
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs">
+                🧠 Ciencia
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-[1.15] tracking-tight text-primary">
+                ¿Qué es exactamente la adicción al celular?
+            </h1>
+
+            <p class="text-lg md:text-xl text-dark-navy/70 font-medium leading-relaxed">
+                Mucho se habla del tema. Poco se explica qué significa realmente — y cómo distinguirlo del simple uso intensivo.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 text-sm text-dark-navy/50 font-medium pt-2 border-t border-primary/5">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">K</div>
+                    <span>Kairos Team</span>
+                </div>
+                <span>·</span>
+                <span>8 Abril, 2026</span>
+                <span>·</span>
+                <span class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-base">schedule</span>
+                    4 min de lectura
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <main class="px-6 pb-16">
+        <article class="max-w-3xl mx-auto">
+            <div class="bg-pure-white rounded-3xl p-8 md:p-12 shadow-premium border border-primary/5">
+                <div class="article-body">
+
+                    <p>
+                        La palabra "adicción" se usa mucho cuando hablamos de tecnología. Se usa cuando alguien chequea el teléfono en la mesa. Se usa cuando no podemos terminar una serie sin abrir Instagram. Se usa, casi, para cualquier hábito que se repite más de lo que querríamos.
+                    </p>
+
+                    <p>
+                        El problema con usarla para todo es que pierde su peso. Y cuando pierde su peso, también perdemos la posibilidad de tomar el problema en serio cuando sí aplica.
+                    </p>
+
+                    <p>
+                        Entonces: ¿qué quiere decir, científicamente, que alguien sea adicto al celular?
+                    </p>
+
+                    <h2>Una definición que no depende de las horas</h2>
+
+                    <p>
+                        La comunidad científica usa el término <strong>Uso Problemático del Smartphone</strong> (o PSU, por sus siglas en inglés) para referirse a algo muy preciso: la incapacidad de regular el propio uso del dispositivo, con consecuencias reales en la vida cotidiana.
+                    </p>
+
+                    <p>
+                        Lo importante de esa definición es lo que <em>no</em> incluye: las horas. Un uso de cuatro horas diarias puede ser perfectamente funcional. Un uso de dos horas puede ser profundamente problemático. La diferencia no está en el número.
+                    </p>
+
+                    <h2>Los seis criterios que los investigadores usan para evaluarla</h2>
+
+                    <p>
+                        El marco de referencia más influyente para estudiar adicciones conductuales —incluyendo la adicción al smartphone— viene del trabajo del psicólogo Mark Griffiths, de la Universidad de Nottingham Trent, uno de los investigadores más citados en esta área.
+                    </p>
+
+                    <p>Griffiths propone seis criterios. Si varios de ellos están presentes de forma consistente, se habla de adicción conductual genuina:</p>
+
+                    <ol>
+                        <li><strong>Preeminencia:</strong> El dispositivo ocupa un lugar central en los pensamientos y la conducta, incluso cuando no está en uso.</li>
+                        <li><strong>Modificación del estado de ánimo:</strong> Se lo usa deliberadamente para escapar del malestar, el aburrimiento o la ansiedad.</li>
+                        <li><strong>Tolerancia:</strong> Se necesita usarlo cada vez más para alcanzar el mismo efecto o nivel de satisfacción.</li>
+                        <li><strong>Abstinencia:</strong> Cuando no está disponible, aparece irritabilidad, angustia o inquietud.</li>
+                        <li><strong>Conflicto:</strong> Interfiere con relaciones, trabajo, estudio u otras actividades importantes.</li>
+                        <li><strong>Recaída:</strong> Los intentos de reducir el uso fracasan y se vuelve al patrón previo.</li>
+                    </ol>
+
+                    <blockquote>
+                        <p>No hace falta cumplir los seis para que haya un problema. Pero cuantos más estén presentes de forma constante, más clara es la señal.</p>
+                    </blockquote>
+
+                    <h2>¿Cómo se mide clínicamente?</h2>
+
+                    <p>
+                        Como la adicción al smartphone todavía no tiene un diagnóstico oficial en los manuales como el DSM-5 (a diferencia del trastorno por juego de video, que sí está), los investigadores trabajan con escalas validadas. Las más utilizadas son:
+                    </p>
+
+                    <ul>
+                        <li>La <strong>Smartphone Addiction Scale (SAS)</strong>, que evalúa el impacto en distintas áreas de la vida.</li>
+                        <li>La <strong>Smartphone Addiction Proneness Scale (SAPS)</strong>, usada sobre todo en estudios de neuroimagen para correlacionar los puntajes con cambios estructurales en el cerebro.</li>
+                        <li>La <strong>Mobile Phone Addiction Tendency Scale (MPATS)</strong>, que mide cuatro dimensiones: preeminencia, abstinencia, comodidad social y cambios de humor. Un puntaje de 48 o más en esta escala se usa para clasificar la adicción clínicamente.</li>
+                    </ul>
+
+                    <p>
+                        Lo que todas estas escalas tienen en común: no preguntan cuántas horas pasas con el celular. Preguntan <em>cómo te sientes</em> cuando no lo tienes, si puedes dejarlo cuando quieres, y si interfiere con tu vida.
+                    </p>
+
+                    <div class="callout">
+                        <div class="callout-title">
+                            <span class="material-symbols-outlined text-accent-green">labs</span>
+                            La distinción que marca todo
+                        </div>
+                        <p>Investigadores de Weill Cornell Medicine y Columbia University, en un estudio publicado en <em>JAMA</em> en 2025, lo formularon con claridad: lo que eleva el riesgo de ansiedad, depresión y otras consecuencias sobre la salud mental no es el tiempo de pantalla en sí, sino la <strong>trayectoria del uso compulsivo</strong> — el patrón que se vuelve progresivamente más difícil de interrumpir. Esa distinción es lo que separa el uso intensivo (normal) del uso problemático (que merece atención).</p>
+                    </div>
+
+                    <h2>¿Cómo saber si aplica a tu caso?</h2>
+
+                    <p>
+                        No hay una respuesta definitiva que pueda dar un artículo. Pero hay preguntas que los investigadores usan como punto de partida:
+                    </p>
+
+                    <ul>
+                        <li>¿Intentaste reducir el uso del celular y no pudiste sostenerlo?</li>
+                        <li>¿Sientes incomodidad, ansiedad o irritabilidad cuando no puedes revisarlo?</li>
+                        <li>¿Interfiere el uso con tu trabajo, tus relaciones o tu descanso?</li>
+                        <li>¿Lo usas para no pensar en algo, más que porque genuinamente quieres?</li>
+                        <li>¿La primera y la última acción del día involucran el teléfono, casi sin elegirlo?</li>
+                    </ul>
+
+                    <p>
+                        Si la mayoría de esas respuestas son sí, no se trata de "ser muy tecnológico". Se trata de un patrón que tiene nombre, que está estudiado, y que tiene solución.
+                    </p>
+
+                    <p>
+                        Nombrar algo correctamente es el primer paso para abordarlo. La adicción al celular no es falta de voluntad ni debilidad de carácter — es un mecanismo conductual bien documentado, con criterios claros y herramientas concretas para trabajarlo.
+                    </p>
+
+                    <p>
+                        Si quieres empezar a observar tus patrones sin juicios, <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener">Kairos</a> fue diseñado exactamente para eso.
+                    </p>
+
+                    <hr style="border: none; border-top: 1px solid #453F7815; margin: 2rem 0;" />
+
+                    <p style="font-size: 0.9rem; color: #1D355770;">
+                        <strong>Fuentes:</strong><br />
+                        Griffiths, M.D. A "components" model of addiction within a biopsychosocial framework. <em>Journal of Substance Use</em>, 2005.<br />
+                        Elhai, J.D.; Dvorak, R.D.; Levine, J.C.; Hall, B.J. Problematic Smartphone Use: A Conceptual Overview and Systematic Review. <em>Journal of Affective Disorders</em>, 2017.<br />
+                        Xiao, Y. et al. Addictive Digital Screen Use Trajectories and Adolescent Mental Health. <em>JAMA</em>, 2025.<br />
+                        Lin, Y.H. et al. Development and Validation of the Smartphone Addiction Inventory (SPAI). <em>PLOS ONE</em>, 2014.
+                    </p>
+
+                </div>
+            </div>
+
+            <!-- Share & CTA strip -->
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-6 bg-pure-white rounded-2xl p-6 shadow-premium border border-primary/5">
+                <div class="flex items-center gap-3">
+                    <span class="text-sm font-bold text-dark-navy/60">Compartir:</span>
+                    <a id="share-twitter" href="#" target="_blank" rel="noopener"
+                        class="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary hover:text-white text-primary flex items-center justify-center transition-colors"
+                        aria-label="Compartir en Twitter">
+                        𝕏
+                    </a>
+                    <a id="share-linkedin" href="#" target="_blank" rel="noopener"
+                        class="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary hover:text-white text-primary flex items-center justify-center transition-colors"
+                        aria-label="Compartir en LinkedIn">
+                        in
+                    </a>
+                    <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='✓ Copiado'"
+                        class="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary hover:text-white text-primary flex items-center justify-center transition-colors"
+                        aria-label="Copiar enlace">
+                        <span class="material-symbols-outlined text-lg">link</span>
+                    </button>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
+                    class="inline-flex items-center gap-2 bg-accent-green hover:bg-opacity-90 text-white px-6 py-3 rounded-xl font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-accent-green/20 text-sm">
+                    <span class="material-symbols-outlined text-lg">android</span>
+                    Prueba Kairos gratis
+                </a>
+            </div>
+
+            <!-- Back to blog -->
+            <div class="mt-8 text-center">
+                <a href="../blog.html" class="inline-flex items-center gap-2 text-primary font-bold hover:underline transition-colors">
+                    <span class="material-symbols-outlined text-lg">arrow_back</span>
+                    Volver al Blog
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <img src="../k-icon.png" alt="Kairos Icon" class="h-12 w-12 object-contain rounded-xl" />
+                        <span class="text-3xl font-black tracking-tight text-white">Kairos</span>
+                    </div>
+                    <p class="text-white/60 max-w-sm leading-relaxed">
+                        Rediseñamos el futuro del bienestar digital a través de la psicología
+                        aplicada y el diseño consciente.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Contacto</h4>
+                    <p class="text-white/60 hover:text-white transition-colors cursor-pointer mb-2">
+                        twocatdigital.io@gmail.com</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Empresa</h4>
+                    <ul class="space-y-3 text-white/60">
+                        <li><a class="hover:text-white transition-colors" href="../blog.html">Blog</a></li>
+                        <li><a class="hover:text-white transition-colors" href="../privacy.html">Privacidad</a></li>
+                        <li><a class="hover:text-white transition-colors" href="../terms.html">Términos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-sm">
+                <p>© 2026 Kairos App. Todos los derechos reservados.</p>
+                <p>Developed by <a href="#" class="text-white font-bold hover:underline">TwoCat Digital</a></p>
+            </div>
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = window.scrollY;
+            const progress = Math.min((scrolled / docHeight) * 100, 100);
+            document.getElementById('reading-progress').style.width = progress + '%';
+        });
+
+        const pageUrl = encodeURIComponent(window.location.href);
+        const pageTitle = encodeURIComponent(document.title);
+        const twitterBtn = document.getElementById('share-twitter');
+        const linkedinBtn = document.getElementById('share-linkedin');
+        if (twitterBtn) twitterBtn.href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
+        if (linkedinBtn) linkedinBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+    </script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>"Brain rot": ¿qué le pasa al cerebro cuando scrolleamos sin propósito? — Blog Kairos</title>
+    <meta name="description" content="Oxford eligió 'brain rot' como palabra del año en 2024. La neurociencia explica qué le pasa al córtex prefrontal con el doomscrolling y el zombie scrolling." />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content='"Brain rot": ¿qué le pasa al cerebro cuando scrolleamos sin propósito?' />
+    <meta property="og:description" content="Oxford eligió 'brain rot' como palabra del año en 2024. La neurociencia explica qué le pasa al córtex prefrontal con el doomscrolling y el zombie scrolling." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://twocatdigital.github.io/kairos-web/blog/brain-rot-doomscrolling-cerebro.html" />
+    <meta property="og:image" content="https://twocatdigital.github.io/kairos-web/k-icon.png" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BS0P92FS7S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BS0P92FS7S');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#453F78",
+                        "accent-green": "#2A9D8F",
+                        "accent-orange": "#E76F51",
+                        "soft-violet": "#D6D1F5",
+                        "calm-cream": "#F4F1DE",
+                        "ice-blue": "#E8F0FE",
+                        "dark-navy": "#1D3557",
+                        "background-light": "#E8F0FE",
+                        "pure-white": "#FEFEFE",
+                    },
+                    fontFamily: {
+                        "display": ["Roboto", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px rgba(69, 63, 120, 0.08)',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #E8F0FE;
+            color: #1D3557;
+        }
+
+        .glass-nav {
+            background: rgba(254, 254, 254, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .article-body h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #453F78;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-body p {
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: #1D3557cc;
+            margin-bottom: 1.25rem;
+        }
+
+        .article-body strong {
+            color: #1D3557;
+            font-weight: 700;
+        }
+
+        .article-body em {
+            font-style: italic;
+        }
+
+        .article-body a {
+            color: #2A9D8F;
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-color: #2A9D8F40;
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.2s;
+        }
+
+        .article-body a:hover {
+            text-decoration-color: #2A9D8F;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .article-body li {
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: #1D3557cc;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-body ul li { list-style-type: disc; }
+        .article-body ol li { list-style-type: decimal; }
+
+        .article-body blockquote {
+            border-left: 4px solid #453F78;
+            background: #453F7808;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            font-style: italic;
+        }
+
+        .article-body blockquote p {
+            margin-bottom: 0;
+            color: #1D3557;
+        }
+
+        .callout {
+            background: linear-gradient(135deg, #2A9D8F10 0%, #453F7810 100%);
+            border: 1px solid #453F7815;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .callout-title {
+            font-weight: 800;
+            color: #453F78;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #reading-progress {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #453F78, #2A9D8F);
+            z-index: 100;
+            transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(69, 63, 120, 0.1) 0%, rgba(69, 63, 120, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(10%, 10%); }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-dark-navy font-display selection:bg-primary/20">
+    <div id="reading-progress" style="width: 0%"></div>
+
+    <div class="overflow-x-hidden w-full relative min-h-screen">
+    <div class="blob top-0 right-0"></div>
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-primary/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 transition-transform hover:-translate-y-1 py-2">
+                <img src="../logo_horizontal.png" alt="Kairos Branding" fetchpriority="high"
+                    class="h-12 md:h-16 w-auto object-contain scale-[1.3] origin-left" />
+            </a>
+            <div class="hidden md:flex items-center gap-8 font-medium">
+                <a class="hover:text-primary transition-colors" href="../index.html#features">Características</a>
+                <a class="hover:text-primary transition-colors" href="../index.html#science">La Ciencia</a>
+                <a class="text-primary font-bold border-b-2 border-primary pb-1" href="../blog.html">Blog</a>
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
+                    class="bg-accent-green hover:bg-opacity-90 text-white px-6 py-2.5 rounded-full font-bold transition-transform transform hover:scale-105 active:scale-95 shadow-lg shadow-accent-green/20">
+                    Descargar para Android
+                </a>
+            </div>
+            <div class="md:hidden text-primary flex items-center gap-4">
+                <a href="../blog.html" class="font-bold text-sm">Blog</a>
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
+                    class="bg-accent-green text-white px-4 py-2 rounded-full text-sm font-bold">
+                    Descargar
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="pt-32 pb-8 px-6">
+        <div class="max-w-3xl mx-auto space-y-6">
+            <div class="flex items-center gap-2 text-sm text-dark-navy/50 font-medium">
+                <a href="../blog.html" class="hover:text-primary transition-colors">Blog</a>
+                <span class="material-symbols-outlined text-sm">chevron_right</span>
+                <span class="text-primary font-bold">Ciencia</span>
+            </div>
+
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs">
+                🧠 Ciencia
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-[1.15] tracking-tight text-primary">
+                "Brain rot": ¿qué le pasa al cerebro cuando scrolleamos sin propósito?
+            </h1>
+
+            <p class="text-lg md:text-xl text-dark-navy/70 font-medium leading-relaxed">
+                Oxford eligió este término como palabra del año en 2024. La neurociencia explica por qué la elección fue tan precisa.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 text-sm text-dark-navy/50 font-medium pt-2 border-t border-primary/5">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">K</div>
+                    <span>Kairos Team</span>
+                </div>
+                <span>·</span>
+                <span>8 Abril, 2026</span>
+                <span>·</span>
+                <span class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-base">schedule</span>
+                    4 min de lectura
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <main class="px-6 pb-16">
+        <article class="max-w-3xl mx-auto">
+            <div class="bg-pure-white rounded-3xl p-8 md:p-12 shadow-premium border border-primary/5">
+                <div class="article-body">
+
+                    <p>
+                        En 2024, la Universidad de Oxford eligió <em>brain rot</em> —podredumbre cerebral— como la palabra del año. No es jerga de adolescentes. Es el nombre que un diccionario de referencia mundial le dio a algo que millones de personas ya sentían pero no sabían cómo describir: esa sensación de que el cerebro está más lento, más disperso, menos capaz de concentrarse en algo que requiera esfuerzo real.
+                    </p>
+
+                    <p>
+                        La pregunta es si hay algo real detrás. Si no es solo impresión.
+                    </p>
+
+                    <p>
+                        La respuesta es sí. Y la explicación no tiene nada de metafórica.
+                    </p>
+
+                    <h2>Dos formas de scrollear, un mismo resultado</h2>
+
+                    <p>
+                        Los investigadores distinguen dos patrones de consumo digital que alimentan el brain rot. No son iguales, pero producen efectos parecidos.
+                    </p>
+
+                    <p>
+                        El primero es el <strong>doomscrolling</strong>: el consumo compulsivo de contenido negativo o de baja calidad en redes sociales. El problema no es solo lo que se consume — es que atrapa al cerebro en un ciclo de rumia constante que le impide hacer otra cosa. Un estudio publicado en <em>Applied Research in Quality of Life</em> por Satici et al. (2023) documentó que ese estado de rumia genera angustia psicológica sostenida y bloquea la capacidad de pasar a actividades cognitivas productivas. El mismo equipo encontró que aproximadamente el <strong>52% de la información en los videos más vistos de TikTok es desinformación</strong> — lo que agrava la carga cognitiva sobre un cerebro que intenta procesar lo que consume.
+                    </p>
+
+                    <p>
+                        El segundo es el <strong>zombie scrolling</strong>: pasar por el feed sin ninguna intención real, en un estado semi-disociativo. Según la investigación de Jiang et al., este consumo sin propósito agota la capacidad del cerebro para sostener la atención, genera una sensación real de desconexión y aumenta el aislamiento emocional — no porque el contenido sea malo, sino porque el acto mismo de consumir sin elegir destruye el enfoque.
+                    </p>
+
+                    <h2>Lo que le pasa al córtex prefrontal</h2>
+
+                    <p>
+                        Un <em>scoping review</em> publicado en <em>Frontiers in Psychology</em> en 2026, a cargo de investigadores de la Universidad Normal de Luoyang y la Universidad Normal de Shanghái, mapeó los cambios cerebrales asociados al uso digital excesivo revisando múltiples estudios de neuroimagen. Lo que encontraron fue consistente en todos ellos.
+                    </p>
+
+                    <p>
+                        Las regiones más afectadas son subáreas del <strong>córtex prefrontal</strong>: la corteza prefrontal dorsolateral, la corteza orbitofrontal y la corteza cingulada anterior — las zonas responsables de la toma de decisiones, el control de impulsos y la regulación del comportamiento.
+                    </p>
+
+                    <p>
+                        Los estudios de morfometría cerebraly muestran que el uso digital excesivo se correlaciona con <strong>reducción del volumen de materia gris y adelgazamiento cortical</strong> en esas regiones. Y la consecuencia de ese adelgazamiento es medible: mayor impulsividad y mayor dificultad para resistir la gratificación inmediata.
+                    </p>
+
+                    <blockquote>
+                        <p>Dicho más simple: el córtex prefrontal es el sistema de frenos del cerebro. El consumo digital compulsivo lo desgasta.</p>
+                    </blockquote>
+
+                    <div class="callout">
+                        <div class="callout-title">
+                            <span class="material-symbols-outlined text-accent-green">memory</span>
+                            Memoria y atención bajo presión
+                        </div>
+                        <p>La velocidad con la que consumimos contenido en pantalla tiene un costo directo sobre la memoria. La investigación de Mendez et al. explica el mecanismo: la rapidez de la información digital impide el procesamiento profundo que el cerebro necesita para consolidar recuerdos a largo plazo. Jiang et al. agrega déficits documentados en la memoria de trabajo — la que usamos para razonar, planificar y mantener una idea en mente mientras hacemos otra cosa. Sobre la atención: según Aarts et al., las interrupciones digitales repetidas no solo distraen en el momento. Se acumulan y reducen la capacidad de sostenerse en una sola tarea durante períodos extendidos.</p>
+                    </div>
+
+                    <h2>¿Qué hacer con esto?</h2>
+
+                    <p>Tres cosas concretas que tienen respaldo en la literatura:</p>
+
+                    <ol>
+                        <li><strong>Scrollear con intención, no por reflejo.</strong> La diferencia entre buscar algo específico y abrir la app "por las dudas" es neurológicamente relevante. Una activa el córtex prefrontal; la otra lo evita.</li>
+                        <li><strong>Recuperar el silencio cognitivo.</strong> El cerebro necesita ciclos sin estímulo para consolidar información y restaurar la capacidad de atención. No es ocio — es mantenimiento.</li>
+                        <li><strong>Reducir las fuentes de interrupción.</strong> Cada notificación es una demanda sobre el mismo sistema que ya está sobrecargado. Menos puntos de entrada, menos fatiga acumulada.</li>
+                    </ol>
+
+                    <p>
+                        El brain rot no es un destino inevitable. Es el resultado acumulado de hábitos de consumo que el cerebro no fue diseñado para sostener a esa escala y velocidad. Y como todo hábito, puede modificarse — no con fuerza de voluntad pura, sino con estructura.
+                    </p>
+
+                    <p>
+                        Si quieres empezar a poner estructura donde antes había solo reflejo, <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener">Kairos</a> hace exactamente eso.
+                    </p>
+
+                    <hr style="border: none; border-top: 1px solid #453F7815; margin: 2rem 0;" />
+
+                    <p style="font-size: 0.9rem; color: #1D355770;">
+                        <strong>Fuentes:</strong><br />
+                        Satici, B. et al. Doomscrolling and psychological distress. <em>Applied Research in Quality of Life</em>, 2023.<br />
+                        Jin, X.; Wei, Y.; Chai, J.; Wu, X.; Chen, H.; Ding, W. Structural and functional brain abnormalities in digital addiction. <em>Frontiers in Psychology</em>, 2026.<br />
+                        Jiang, Q. et al. Zombie scrolling, cognitive depletion and emotional isolation. <em>Computers in Human Behavior</em>, 2023.<br />
+                        Aarts, E. et al. Digital interruptions and sustained attention deficits. <em>Frontiers in Psychology</em>, 2022.<br />
+                        Mendez, M.F. et al. Internet addiction and memory consolidation. <em>Behavioral Sciences</em>, 2022.
+                    </p>
+
+                </div>
+            </div>
+
+            <!-- Share & CTA strip -->
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-6 bg-pure-white rounded-2xl p-6 shadow-premium border border-primary/5">
+                <div class="flex items-center gap-3">
+                    <span class="text-sm font-bold text-dark-navy/60">Compartir:</span>
+                    <a id="share-twitter" href="#" target="_blank" rel="noopener"
+                        class="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary hover:text-white text-primary flex items-center justify-center transition-colors"
+                        aria-label="Compartir en Twitter">
+                        𝕏
+                    </a>
+                    <a id="share-linkedin" href="#" target="_blank" rel="noopener"
+                        class="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary hover:text-white text-primary flex items-center justify-center transition-colors"
+                        aria-label="Compartir en LinkedIn">
+                        in
+                    </a>
+                    <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='✓ Copiado'"
+                        class="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary hover:text-white text-primary flex items-center justify-center transition-colors"
+                        aria-label="Copiar enlace">
+                        <span class="material-symbols-outlined text-lg">link</span>
+                    </button>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.twocatdigital.kairos" target="_blank" rel="noopener"
+                    class="inline-flex items-center gap-2 bg-accent-green hover:bg-opacity-90 text-white px-6 py-3 rounded-xl font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-accent-green/20 text-sm">
+                    <span class="material-symbols-outlined text-lg">android</span>
+                    Prueba Kairos gratis
+                </a>
+            </div>
+
+            <!-- Back to blog -->
+            <div class="mt-8 text-center">
+                <a href="../blog.html" class="inline-flex items-center gap-2 text-primary font-bold hover:underline transition-colors">
+                    <span class="material-symbols-outlined text-lg">arrow_back</span>
+                    Volver al Blog
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <img src="../k-icon.png" alt="Kairos Icon" class="h-12 w-12 object-contain rounded-xl" />
+                        <span class="text-3xl font-black tracking-tight text-white">Kairos</span>
+                    </div>
+                    <p class="text-white/60 max-w-sm leading-relaxed">
+                        Rediseñamos el futuro del bienestar digital a través de la psicología
+                        aplicada y el diseño consciente.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Contacto</h4>
+                    <p class="text-white/60 hover:text-white transition-colors cursor-pointer mb-2">
+                        twocatdigital.io@gmail.com</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Empresa</h4>
+                    <ul class="space-y-3 text-white/60">
+                        <li><a class="hover:text-white transition-colors" href="../blog.html">Blog</a></li>
+                        <li><a class="hover:text-white transition-colors" href="../privacy.html">Privacidad</a></li>
+                        <li><a class="hover:text-white transition-colors" href="../terms.html">Términos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-sm">
+                <p>© 2026 Kairos App. Todos los derechos reservados.</p>
+                <p>Developed by <a href="#" class="text-white font-bold hover:underline">TwoCat Digital</a></p>
+            </div>
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = window.scrollY;
+            const progress = Math.min((scrolled / docHeight) * 100, 100);
+            document.getElementById('reading-progress').style.width = progress + '%';
+        });
+
+        const pageUrl = encodeURIComponent(window.location.href);
+        const pageTitle = encodeURIComponent(document.title);
+        const twitterBtn = document.getElementById('share-twitter');
+        const linkedinBtn = document.getElementById('share-linkedin');
+        if (twitterBtn) twitterBtn.href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
+        if (linkedinBtn) linkedinBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+    </script>
+</body>
+</html>
