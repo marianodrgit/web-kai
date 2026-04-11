@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="scroll-smooth" lang="es">
+<html lang="es">
 
 <head>
     <meta charset="utf-8" />
@@ -36,7 +36,14 @@
         }
     </script>
     <style>
+        /* Smooth scroll only for anchor-link navigation */
+        @media (prefers-reduced-motion: no-preference) {
+            html {
+                scroll-behavior: smooth;
+            }
+        }
         body {
+            overflow-x: hidden;
             font-family: 'Roboto', sans-serif;
             background-color: #E8F0FE;
             color: #1D3557;
@@ -46,6 +53,15 @@
             background: rgba(254, 254, 254, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Logo transparency fix */
+        .logo-img {
+            background-color: transparent;
+        }
+        .glass-nav .logo-img {
+            background-color: white;
+            border-radius: 4px;
         }
     </style>
 </head>
