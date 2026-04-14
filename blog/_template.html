@@ -59,11 +59,7 @@
     </script>
     <style>
         /* Smooth scroll only for anchor-link navigation */
-        @media (prefers-reduced-motion: no-preference) {
-            html {
-                scroll-behavior: smooth;
-            }
-        }
+        /* Native scroll behavior forced */
         body {
             overflow-x: hidden;
             font-family: 'Roboto', sans-serif;
@@ -193,7 +189,8 @@
             background: radial-gradient(circle, rgba(69, 63, 120, 0.1) 0%, rgba(69, 63, 120, 0) 70%);
             border-radius: 50%;
             z-index: -1;
-            filter: blur(80px);
+            /* filter: blur(80px); removed for performance */
+            will-change: transform;
             animation: move 20s infinite alternate;
             pointer-events: none;
         }

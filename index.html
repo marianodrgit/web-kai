@@ -73,11 +73,7 @@
     </script>
     <style>
         /* Smooth scroll only for anchor-link navigation, not touch scrolling */
-        @media (prefers-reduced-motion: no-preference) {
-            html {
-                scroll-behavior: smooth;
-            }
-        }
+        /* Native scroll behavior forced */
 
         body {
             font-family: 'Roboto', sans-serif;
@@ -154,7 +150,7 @@
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none; /* Firefox */
-            scroll-behavior: smooth;
+            
         }
         .testimonial-track::-webkit-scrollbar {
             display: none; /* Chrome/Safari */
@@ -197,7 +193,7 @@
             background: radial-gradient(circle, rgba(69, 63, 120, 0.15) 0%, rgba(69, 63, 120, 0) 70%);
             border-radius: 50%;
             z-index: -1;
-            filter: blur(80px);
+            /* filter: blur(80px); removed for performance */
             animation: move 20s infinite alternate;
             pointer-events: none;
         }
