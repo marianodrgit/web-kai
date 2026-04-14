@@ -81,7 +81,7 @@
             color: #1D3557;
             min-height: 100dvh;
             /* Prevent ANY horizontal scroll at the root level */
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         /* ===== Premium Gallery Glass Interactions ===== */
@@ -90,7 +90,9 @@
             gap: 1.5rem;
             padding-bottom: 3rem;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
+            scroll-snap-type: x proximity;
+            overscroll-behavior-x: contain;
+            touch-action: pan-y; /* Permite scroll vertical */
             -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS/Android */
             scrollbar-width: none; /* Firefox */
         }
@@ -147,7 +149,9 @@
         .testimonial-track {
             display: flex;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
+            scroll-snap-type: x proximity;
+            overscroll-behavior-x: contain;
+            touch-action: pan-y; /* Permite scroll vertical */
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none; /* Firefox */
             
@@ -223,7 +227,7 @@
 
 <body
     class="bg-background-light dark:bg-background-dark text-dark-navy dark:text-slate-100 font-display selection:bg-primary/20">
-    <div class="relative w-full overflow-x-hidden">
+    <div class="relative w-full overflow-x-clip">
     <div class="blob top-0 left-0"></div>
     <div class="blob bottom-0 right-0" style="animation-delay: -10s; background: radial-gradient(circle, rgba(42, 157, 143, 0.1) 0%, rgba(42, 157, 143, 0) 70%);"></div>
     <!-- Sticky Navbar -->
